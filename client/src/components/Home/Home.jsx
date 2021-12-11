@@ -4,6 +4,7 @@ import HomeStyle from "./homeStyles";
 import axios from "axios";
 import List from "./ListOperations";
 import { Link } from "react-router-dom";
+import Form from "../Form/Form";
 
 const Home = () => {
   const [operation, setOperations] = useState([]);
@@ -23,7 +24,7 @@ const Home = () => {
       <div>
         <h1>HOME</h1>
         <Link to="/form">
-          Agregar operacion
+          <Form></Form>
         </Link>
       </div>
       <table>

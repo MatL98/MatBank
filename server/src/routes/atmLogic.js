@@ -3,13 +3,19 @@ const { Router } = express
 const router = new Router()
 const moment = require("moment")
 const knex = require("../db/db")
+const Container = require("../db/ContainerKnex")
+const bank = new Container(knex)
 
 
-let arrMoney = []
+
 let getCashTotal = 0
 
 router.get("/home", async (req, res)=>{
-    const results = await knex.from("operations").select("*").orderBy('id','desc').limit("10").then((data)=> {res.json({data})})
+  //const results = await knex.from("operations").select("*").orderBy('id','desc').limit("10").then((data)=> {res.json({data})})
+  let result = await bank.getAll().then((data)=>{
+    console.log(data);
+  })
+  
   })
 
 router.post("/form", (req, res)=>{
@@ -21,32 +27,19 @@ router.post("/form", (req, res)=>{
     type: type
   }
 
-  knex("operations").insert(operation).then((data)=>{
+ /*  knex("operations").insert(operation).then((data)=>{
     res.json({data});
-  }).catch(err=>console.log(err))
+  }).catch(err=>console.log(err)) */
   
   const checkType = (operation) =>{
-      if ( operation.type === 'entry' ) {
-        knex
-          .from("operations")
-          .select("amount")
-          .then((data)=>{
-          let cashDB = data.map(x => x.amount)
-          let cashTotal = cashDB.reduce((acc, i)=> acc + i)
-          getCashTotal = cashTotal
-          console.log(`Su saldo es de ${getCashTotal}`); 
-          })
-      } else{
-        if (getCashTotal === 0 || operation.amount > getCashTotal) {
-          console.log(`No puedes retirar este monto`);
-        } else {
-          const removeCash = getCashTotal - operation.amount
-          getCashTotal = removeCash
-        }
+    if ( operation.type === 'entry' ) {
+        //const cash = knex('operations').sum({total: 'amount'}).then((data)=> { data[0].total })
+        console.log(`Tu saldo es de ${cash}`);
+      } else if(operation.type === 'cashOut'){
+        console.log(-Math.abs(operation.amount));
       }
-  }
-  
-  
+    }
+    
   checkType(operation)
 })
 
@@ -55,8 +48,8 @@ router.put("/:id", (req, res)=>{
   const newOperation = {concept, amount}
   const id = req.params.id
 
-  knex.from("operations").where("id", id).update(newOperation).then((data)=> {data})
-  .catch((err)=> err)
+  /* knex.from("operations").where("id", id).update(newOperation).then((data)=> {data})
+  .catch((err)=> err) */
   res.send("se actualizo con exito")
 })
 
