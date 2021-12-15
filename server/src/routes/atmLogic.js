@@ -11,10 +11,10 @@ const bank = new Container(knex)
 let getCashTotal = 0
 
 router.get("/home", async (req, res)=>{
-  //const results = await knex.from("operations").select("*").orderBy('id','desc').limit("10").then((data)=> {res.json({data})})
-  let result = await bank.getAll().then((data)=>{
+  const results = await knex.from("operations").select("*").orderBy('id','desc').limit("10").then((data)=> {res.json({data})})
+  /* let result = await bank.getAll().then((data)=>{
     console.log(data);
-  })
+  }) */
   
   })
 
@@ -27,13 +27,13 @@ router.post("/form", (req, res)=>{
     type: type
   }
 
- /*  knex("operations").insert(operation).then((data)=>{
+  knex("operations").insert(operation).then((data)=>{
     res.json({data});
-  }).catch(err=>console.log(err)) */
+  }).catch(err=>console.log(err))
   
   const checkType = (operation) =>{
     if ( operation.type === 'entry' ) {
-        //const cash = knex('operations').sum({total: 'amount'}).then((data)=> { data[0].total })
+        const cash = knex('operations').sum({total: 'amount'}).then((data)=> { data[0].total })
         console.log(`Tu saldo es de ${cash}`);
       } else if(operation.type === 'cashOut'){
         console.log(-Math.abs(operation.amount));

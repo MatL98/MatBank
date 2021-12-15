@@ -2,18 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const Form = () =>{
-   const [datos , setDatos ] = useState({
-     concept: '',
-     amount: '',
-     type: ''
-   })
+  const [datos , setDatos ] = useState({
+      concept: '',
+      amount: '',
+      type: ''
+    })
 
-  // const handleInput = (e) =>{
-  //   setDatos({
-  //     ...datos,
-  //     [e.target.name]: e.target.value
-  //   })
-  // }
   console.log(datos); 
   const handleFormSubmit = () =>{
 
@@ -30,10 +24,10 @@ const Form = () =>{
 
     }
 console.log("es necesario eligir los tres campos")
-
   }
- 
+
   return(
+    <>
     <form>
       <input type="text" name="concept" placeholder="Concepto" id="concept" value={datos.concept} onChange={(e)=> setDatos({...datos, concept: e.target.value})} />
       <input type="number"  name="amount" placeholder="Monto" id="amount" value={datos.amount} onChange={(e)=> setDatos({...datos, amount: e.target.value})}/>
@@ -44,6 +38,10 @@ console.log("es necesario eligir los tres campos")
       </select>
       <input type="button" value="Enviar" onClick={ handleFormSubmit }/>
     </form>
+    <div>
+      <a href="/">Regresar al home</a>
+    </div>
+    </>
   )
   
 }

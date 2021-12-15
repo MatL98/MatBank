@@ -8,6 +8,10 @@ const HomeStyle = styled.div`
   justify-content: center;
   margin: 0.5rem;
 
+  a{
+    color: white;
+  }
+
   table{
     display: flex;
     flex-direction: column;

@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
-import Balance from "./Balance";
+import Balance from "./Balance/Balance";
 import HomeStyle from "./homeStyles";
 import axios from "axios";
-import List from "./ListOperations";
-import { Link } from "react-router-dom";
-import Form from "../Form/Form";
+import List from "./List/ListOperations";
 
 const Home = () => {
   const [operation, setOperations] = useState([]);
@@ -23,9 +21,8 @@ const Home = () => {
     <HomeStyle>
       <div>
         <h1>HOME</h1>
-        <Link to="/form">
-          <Form></Form>
-        </Link>
+        <Balance data={operation} key= {operation}/>
+        <a href="/form">Realizar operacion</a>
       </div>
       <table>
           <thead>
