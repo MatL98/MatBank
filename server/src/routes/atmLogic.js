@@ -4,7 +4,7 @@ const router = new Router()
 const moment = require("moment")
 const knex = require("../db/db")
 const Container = require("../db/ContainerKnex")
-const bank = new Container(knex)
+const bank = new Container(knex("operations"))
 
 
 
@@ -26,17 +26,24 @@ router.post("/form", (req, res)=>{
     date: moment().format('Do MM YY, h:mm:ss a'),
     type: type
   }
-
-  knex("operations").insert(operation).then((data)=>{
+  /* knex("operations").insert(operation).then((data)=>{
     res.json({data});
-  }).catch(err=>console.log(err))
+  }).catch(err=>console.log(err)) */
   
-  const checkType = (operation) =>{
+  const checkType = async (operation) =>{
     if ( operation.type === 'entry' ) {
-        const cash = knex('operations').sum({total: 'amount'}).then((data)=> { data[0].total })
-        console.log(`Tu saldo es de ${cash}`);
+      bank.save(operation)
+        const cash = await knex('operations').sum({total: 'amount'}).then((data)=> console.log(data[0].total))
       } else if(operation.type === 'cashOut'){
-        console.log(-Math.abs(operation.amount));
+        const newOp = {
+          concept: operation.concept,
+          amount: -Math.abs(operation.amount),
+          date: operation.date,
+          type: operation.type
+        }
+        bank.save(newOp)
+        const cash = await knex('operations').sum({total: 'amount'}).then((data)=> console.log(data[0].total))
+        console.log(cash);
       }
     }
     

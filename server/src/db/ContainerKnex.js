@@ -1,19 +1,18 @@
+const { default: knex } = require("knex")
 
 class Bank{
     constructor(table){
         this.table = table
     }
 
-    save = async(op)=>{
+    save = (op) =>{
         this.table.insert(op).then((data)=>{
-            return data
+        return data
         }).catch(err=>console.log(err))
     }
 
     getAll = async()=>{
-        this.table.from('operations').select("*").orderBy('id','desc').limit("10").then((data)=> {
-        let datos = JSON.stringify(data)
-        let newData = JSON.parse(datos)
+        knex.from('operations').select("*").orderBy('id','desc').limit("10").then((data)=> {
         return newData
         })
     }
@@ -25,9 +24,9 @@ class Bank{
         .catch((err)=> err)
     }
 
-    add = async()=>{
+    cash = async()=>{
         this.table.sum({total: 'amount'}).then((data)=> { 
-            return data[0].total })
+            console.log(data.map(x => console.log(x)));})
         .catch(err=> err)
     }
 }

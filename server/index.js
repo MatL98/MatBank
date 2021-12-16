@@ -1,9 +1,9 @@
 const express = require("express")
-const app = express()
 const bodyParser = require("body-parser")
 const port = process.env.PORT || 3001
 const routerAtm = require("./src/routes/atmLogic")
 const cors = require('cors')
+const app = express()
 
 
 
