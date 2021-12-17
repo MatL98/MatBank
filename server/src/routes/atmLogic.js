@@ -8,15 +8,16 @@ const bank = new Container(knex("operations"))
 
 
 
-let getCashTotal = 0
-
 router.get("/home", async (req, res)=>{
-  const results = await knex.from("operations").select("*").orderBy('id','desc').limit("10").then((data)=> {res.json({data})})
-  /* let result = await bank.getAll().then((data)=>{
-    console.log(data);
-  }) */
-  
+  const results = await knex.from("operations").select("*").orderBy('id','desc').limit("10")
+  const sum = await knex('operations').sum({total: 'amount'})
+  res.json({data: results, sum: sum[0].total})
   })
+
+router.get("/sum",  async (req, res)=>{
+  let result = await bank.getAll()
+  res.json(result)
+})
 
 router.post("/form", (req, res)=>{
   const {concept, amount, type} = req.body
@@ -33,17 +34,13 @@ router.post("/form", (req, res)=>{
   const checkType = async (operation) =>{
     if ( operation.type === 'entry' ) {
       bank.save(operation)
-        const cash = await knex('operations').sum({total: 'amount'}).then((data)=> console.log(data[0].total))
+        await knex('operations').sum({total: 'amount'}).then((data)=> console.log(data[0].total))
       } else if(operation.type === 'cashOut'){
-        const newOp = {
-          concept: operation.concept,
-          amount: -Math.abs(operation.amount),
-          date: operation.date,
-          type: operation.type
+        const newOp = {...operation,
+          amount: -Math.abs(operation.amount)
         }
         bank.save(newOp)
-        const cash = await knex('operations').sum({total: 'amount'}).then((data)=> console.log(data[0].total))
-        console.log(cash);
+        await knex('operations').sum({total: 'amount'}).then((data)=> console.log(data[0].total))
       }
     }
     

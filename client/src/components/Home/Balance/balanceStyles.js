@@ -9,7 +9,7 @@ export const CardStyle = styled.div`
     width: 500px;
     height: 300px;
     background-color: white;
-    opacity: 0.1;
+    opacity: 1;
     backdrop-filterL blur(10px);
     box-shadow: 0 25px 25px rgba(0,0,0, 0.5);
     border-radius: 20px;
@@ -27,8 +27,9 @@ export const CardStyle = styled.div`
     }
 `
 
-export const ContentStyle = styled.div`
+export const ContentStyle = styled.p`
 
+    color: white;
 
 `
 

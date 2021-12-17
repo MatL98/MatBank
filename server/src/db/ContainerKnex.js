@@ -11,23 +11,23 @@ class Bank{
         }).catch(err=>console.log(err))
     }
 
-    getAll = async()=>{
-        knex.from('operations').select("*").orderBy('id','desc').limit("10").then((data)=> {
+    getAll = async ()=>{
+        const newData = await this.table.select("*").orderBy('id','desc').limit("10")
         return newData
-        })
     }
 
-    getById = async(id, newOperation)=>{
+    getById = (id, newOperation)=>{
         this.table.where("id", id).update(newOperation).then((data)=> {
             return data
         })
         .catch((err)=> err)
     }
 
-    cash = async()=>{
+    cash = ()=>{
         this.table.sum({total: 'amount'}).then((data)=> { 
             console.log(data.map(x => console.log(x)));})
         .catch(err=> err)
+
     }
 }
 

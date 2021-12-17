@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const Form = () =>{
+  const [ showMessage, setShowMessage ] = useState(false)
   const [datos , setDatos ] = useState({
       concept: '',
       amount: '',
@@ -21,7 +22,7 @@ const Form = () =>{
       .catch(function (error) {
         console.log(error);
       });
-
+      setShowMessage(true)
     }
 console.log("es necesario eligir los tres campos")
   }
@@ -38,6 +39,7 @@ console.log("es necesario eligir los tres campos")
       </select>
       <input type="button" value="Enviar" onClick={ handleFormSubmit }/>
     </form>
+    <p style={{visibility:showMessage ? "visible" : "hidden"}}>{datos.type === 'entry' ? `Ingresaste ${datos.amount}` : `Retiraste ${datos.amount}`}</p>
     <div>
       <a href="/">Regresar al home</a>
     </div>

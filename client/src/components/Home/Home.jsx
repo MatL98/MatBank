@@ -8,7 +8,8 @@ const Home = () => {
   const [operation, setOperations] = useState([]);
   const getApi = () => {
     axios.get("http://localhost:3001/home").then(function (response) {
-      setOperations(response.data.data);
+      console.log(response.data);
+      setOperations(response.data);
       return response;
     });
   };
@@ -16,12 +17,12 @@ const Home = () => {
   useEffect(() => {
     getApi();
   }, []);
-
+  
   return (
     <HomeStyle>
       <div>
         <h1>HOME</h1>
-        <Balance data={operation} key= {operation}/>
+        <Balance data={operation.sum}/>
         <a href="/form">Realizar operacion</a>
       </div>
       <table>
@@ -36,9 +37,9 @@ const Home = () => {
           </thead>
         <tbody>
           <tr className="row">
-            {operation.map((op, idx) => {
-              return <List data={op} key={idx} />;
-            })}
+            {operation.data ? (operation.data.map((op) => {
+              return <List data={op} key={op.id} />;
+            })) : ("cargando...")}
           </tr>
         </tbody>
       </table>

@@ -1,11 +1,9 @@
 import React from "react";
-import { BalanceStyle, CardStyle } from "./balanceStyles";
+import { BalanceStyle, CardStyle, ContentStyle } from "./balanceStyles";
 
 
-const Balance = (data) =>{
-  const cashBalance = data.data.map((x)=>{
-    return x.amount;
-  })
+const Balance = (prop) =>{
+  const cashBalance = prop.data
 
   return(
     <BalanceStyle>
