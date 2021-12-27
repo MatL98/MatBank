@@ -43,17 +43,21 @@ router.post("/form", (req, res)=>{
         await knex('operations').sum({total: 'amount'}).then((data)=> console.log(data[0].total))
       }
     }
-    
+  
   checkType(operation)
 })
 
 router.put("/:id", (req, res)=>{
   const {concept, amount} = req.body
-  const newOperation = {concept, amount}
   const id = req.params.id
+  const updateOp = {
+    concept: concept,
+    amount: amount
+  }
 
-  /* knex.from("operations").where("id", id).update(newOperation).then((data)=> {data})
-  .catch((err)=> err) */
+  console.log(updateOp, id);
+
+  //bank.update(id, updateOp)
   res.send("se actualizo con exito")
 })
 
