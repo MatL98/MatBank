@@ -14,33 +14,26 @@ router.get("/home", async (req, res)=>{
   res.json({data: results, sum: sum[0].total})
   })
 
-router.get("/sum",  async (req, res)=>{
-  let result = await bank.getAll()
-  res.json(result)
-})
 
 router.post("/form", (req, res)=>{
   const {concept, amount, type} = req.body
   const operation = {
     concept: concept,
     amount: amount,
-    date: moment().format('Do MM YY, h:mm:ss a'),
+    date: moment().format('D/MM/YY, h:mm:ss'),
     type: type
   }
-  /* knex("operations").insert(operation).then((data)=>{
-    res.json({data});
-  }).catch(err=>console.log(err)) */
   
   const checkType = async (operation) =>{
     if ( operation.type === 'entry' ) {
-      bank.save(operation)
-        await knex('operations').sum({total: 'amount'}).then((data)=> console.log(data[0].total))
+        bank.save(operation)
+        await knex('operations').sum({total: 'amount'})
       } else if(operation.type === 'cashOut'){
         const newOp = {...operation,
           amount: -Math.abs(operation.amount)
         }
         bank.save(newOp)
-        await knex('operations').sum({total: 'amount'}).then((data)=> console.log(data[0].total))
+        await knex('operations').sum({total: 'amount'})
       }
     }
   
@@ -57,7 +50,7 @@ router.put("/:id", (req, res)=>{
 
   console.log(updateOp, id);
 
-  //bank.update(id, updateOp)
+  bank.update(id, updateOp)
   res.send("se actualizo con exito")
 })
 
