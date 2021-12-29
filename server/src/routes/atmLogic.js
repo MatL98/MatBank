@@ -51,7 +51,7 @@ router.patch("/:id", (req, res)=>{
   console.log(updateOp, id);
 
   bank.update(id, updateOp)
-  return res.send("se actualizo con exito")
+  res.send("se actualizo con exito")
 })
 
 module.exports = router

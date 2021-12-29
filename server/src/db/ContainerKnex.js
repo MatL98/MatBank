@@ -17,9 +17,8 @@ class Bank{
     }
 
     update = (id, newOperation) =>{
-        return this.table.where({id: id}).update(newOperation).then((data)=> {
-            console.log(data + "es la data");
-            return data 
+        this.table.where({id: id}).update({concept: newOperation.concept, amount: newOperation.amount}).then((data)=> {
+            console.log("esta es la data" + data);
         })
         .catch((err)=> err)
     }
