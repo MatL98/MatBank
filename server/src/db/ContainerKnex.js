@@ -17,8 +17,9 @@ class Bank{
     }
 
     update = (id, newOperation) =>{
-        this.table.where("id", id).update(newOperation).then((data)=> {
-            return data
+        knex("operations").where({id: id}).update(newOperation).then((data)=> {
+            console.log(data + "es la data");
+            return data 
         })
         .catch((err)=> err)
     }

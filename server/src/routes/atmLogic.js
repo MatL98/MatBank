@@ -40,18 +40,18 @@ router.post("/form", (req, res)=>{
   checkType(operation)
 })
 
-router.put("/:id", (req, res)=>{
+router.patch("/:id", (req, res)=>{
   const {concept, amount} = req.body
-  const id = req.params.id
+  const id = +req.params.id
   const updateOp = {
     concept: concept,
-    amount: amount
+    amount: +amount
   }
 
   console.log(updateOp, id);
 
   bank.update(id, updateOp)
-  res.send("se actualizo con exito")
+  return res.send("se actualizo con exito")
 })
 
 module.exports = router
