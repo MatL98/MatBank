@@ -4,7 +4,7 @@ const router = new Router()
 const moment = require("moment")
 const knex = require("../db/db")
 const Container = require("../db/ContainerKnex")
-const bank = new Container(knex("operations"))
+const bank = new Container()
 
 
 
@@ -24,16 +24,16 @@ router.post("/form", (req, res)=>{
     type: type
   }
   
-  const checkType = async (operation) =>{
+  const checkType = (operation) =>{
     if ( operation.type === 'entry' ) {
         bank.save(operation)
-        await knex('operations').sum({total: 'amount'})
+        bank.addCash()
       } else if(operation.type === 'cashOut'){
         const newOp = {...operation,
           amount: -Math.abs(operation.amount)
         }
         bank.save(newOp)
-        await knex('operations').sum({total: 'amount'})
+        bank.addCash()
       }
     }
   
@@ -51,7 +51,7 @@ router.patch("/:id", (req, res)=>{
   console.log(updateOp, id);
 
   bank.update(id, updateOp)
-  res.send("se actualizo con exito")
+  res.status(200).send("se actualizo con exito")
 })
 
 module.exports = router

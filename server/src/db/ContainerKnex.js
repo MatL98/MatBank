@@ -1,34 +1,42 @@
-const { default: knex } = require("knex")
 
-class Bank{
-    constructor(table){
-        this.table = table
-    }
+const knex = require("../db/db")
 
-    save = (op) =>{
-        this.table.insert(op).then((data)=>{
-        return data
-        }).catch(err=>console.log(err))
-    }
+class Bank {
+  constructor(table) {
+    this.table = table;
+  }
 
-    getAll = () =>{
-        const newData = this.table.select("*").orderBy('id','desc').limit("10")
-        return newData
-    }
+  save = (op) => {
+    knex("operations")
+      .insert(op)
+      .then((data) => {
+        return data;
+      })
+      .catch((err) => console.log(err));
+  };
 
-    update = (id, newOperation) =>{
-        this.table.where({id: id}).update({concept: newOperation.concept, amount: newOperation.amount}).then((data)=> {
-            console.log("esta es la data" + data);
-        })
-        .catch((err)=> err)
-    }
+  getAll = () => {
+    const newData = knex("operations").select("*").orderBy("id", "desc").limit("10");
+    const data = JSON.parse(newData)
+    return data;
+  };
 
-    cash = () =>{
-        this.table.sum({total: 'amount'}).then((data)=> { 
-            console.log(data.map(x => console.log(x)));})
-        .catch(err=> err)
+  update =  (id, updateOp) => {
+    knex("operations")
+      .where({ id: id })
+      .update({ concept: updateOp.concept, amount: updateOp.amount })
+      .then((data)=> console.log({data}))
+      .catch((err) => err);
+  };
 
-    }
+  addCash = () => {
+    knex("operations")
+      .sum({ total: "amount" })
+      .then((data) => {
+        console.log(data.map((x) => console.log(x)));
+      })
+      .catch((err) => err);
+  };
 }
 
-module.exports = Bank
+module.exports = Bank;

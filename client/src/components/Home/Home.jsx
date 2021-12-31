@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Balance from "./Balance/Balance";
-import HomeStyle from "./homeStyles";
+import {HomeStyle, BalanceDiv, TableStyle} from "./homeStyles";
 import axios from "axios";
 import List from "./List/ListOperations";
 
+
 const Home = () => {
   const [operation, setOperations] = useState([]);
+  const [selected, setSelected] = useState(0);
+
   const getApi = () => {
     axios.get("http://localhost:3001/home").then(function (response) {
       console.log(response.data);
@@ -20,12 +23,13 @@ const Home = () => {
   
   return (
     <HomeStyle>
-      <div>
+      <BalanceDiv>
         <h1>HOME</h1>
-        <Balance data={operation.sum}/>
         <a href="/form">Realizar operacion</a>
-      </div>
-      <table>
+        <Balance data={operation.sum}/>
+      </BalanceDiv>
+      
+      <TableStyle>
           <thead>
           <tr>
             <th scope="col">Id</th>
@@ -36,13 +40,11 @@ const Home = () => {
           </tr>
           </thead>
         <tbody>
-          <tr className="row">
             {operation.data ? (operation.data.map((op) => {
               return <List data={op} key={op.id} />;
             })) : ("cargando...")}
-          </tr>
         </tbody>
-      </table>
+      </TableStyle>
     </HomeStyle>
   );
 };

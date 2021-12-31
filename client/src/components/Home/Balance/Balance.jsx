@@ -1,16 +1,15 @@
 import React from "react";
-import { BalanceStyle, CardStyle, ContentStyle } from "./balanceStyles";
+import { CardStyle, ContentStyle, ContentStyleCash } from "./balanceStyles";
 
 
 const Balance = (prop) =>{
   const cashBalance = prop.data
 
   return(
-    <BalanceStyle>
       <CardStyle>
-        {cashBalance}
+        <ContentStyle>Balance de la cuenta</ContentStyle>
+        <ContentStyleCash>${cashBalance}</ContentStyleCash>
       </CardStyle>
-    </BalanceStyle>
   )
 
 }
