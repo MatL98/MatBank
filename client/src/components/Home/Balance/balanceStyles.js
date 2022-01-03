@@ -4,9 +4,8 @@ export const CardStyle = styled.div`
     display: flex;
     flex-direction: column;
     position: relative;
-    height: 20rem;
-    opacity: 0.7;
-    backdrop-filter blur(10px);
+    min-height: 20rem;
+    background: rgba(255,255,255, 0.1);
     box-shadow: 0 25px 25px rgba(0,0,0, 0.5);
     border-radius: 20px;
     overflow: hidden;
