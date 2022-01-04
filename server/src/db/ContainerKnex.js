@@ -33,8 +33,16 @@ class Bank {
     knex("operations")
       .sum({ total: "amount" })
       .then((data) => {
-        console.log(data.map((x) => console.log(x)));
+        data.map((x) => (x.total));
       })
+      .catch((err) => err);
+  };
+
+  delete =  (id) => {
+    knex("operations")
+      .where({ id: id })
+      .delete()
+      .then((data)=> console.log({data}))
       .catch((err) => err);
   };
 }

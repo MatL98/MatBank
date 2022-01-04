@@ -1,15 +1,19 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { TitleDiv, ContainerForm, FormStyle, Select, PopUp } from "./formStyle";
+import { TitleDiv, ContainerForm, FormStyle, Select, PopUp, PopUp2 } from "./formStyle";
 
 const Form = () => {
   const [showMessage, setShowMessage] = useState(false);
+  const [failForm, setFailForm] = useState("");
   const [datos, setDatos] = useState({
     concept: "",
     amount: "",
     type: "",
   });
-
+  function hide(){
+    setShowMessage(false)
+    setFailForm('')
+  }
   console.log(datos);
   const handleFormSubmit = () => {
     if (datos.concept && datos.amount && datos.type) {
@@ -22,12 +26,11 @@ const Form = () => {
           console.log(error);
         });
       setShowMessage(true);
-      function hide(){
-        setShowMessage(false)
-      }
       setTimeout(hide, 2000)
     } else {
-      console.log("es necesario eligir los tres campos");
+      let msn = "es necesario eligir los tres campos"
+      setFailForm(msn);
+      setTimeout(hide, 2000)
     }
   };
 
@@ -74,6 +77,12 @@ const Form = () => {
             : `Retiraste ${datos.amount}`}
         </p>
       </PopUp>
+      <PopUp2 style={{ visibility: failForm ? "visible" : "hidden" }} >
+        <p>
+          {failForm
+            ? `${failForm}` : ''}
+        </p>
+      </PopUp2>
     </ContainerForm>
   );
 };

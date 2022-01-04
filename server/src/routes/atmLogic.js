@@ -25,15 +25,20 @@ router.post("/form", (req, res)=>{
   }
   
   const checkType = (operation) =>{
+    let cash = 0
     if ( operation.type === 'entry' ) {
         bank.save(operation)
-        bank.addCash()
+        cash = bank.addCash()
       } else if(operation.type === 'cashOut'){
         const newOp = {...operation,
           amount: -Math.abs(operation.amount)
         }
-        bank.save(newOp)
-        bank.addCash()
+        if ( cash === 0 || cash > newOp.amount) {
+          res.json("No puedes retirar este monto")
+        } else{
+          bank.save(newOp)
+          bank.addCash()
+        }
       }
     }
   
@@ -47,11 +52,16 @@ router.patch("/:id", (req, res)=>{
     concept: concept,
     amount: +amount
   }
-
-  console.log(updateOp, id);
-
+  
   bank.update(id, updateOp)
-  res.status(200).send("se actualizo con exito")
+  res.status(200).send("se actualizó con exito")
+})
+
+
+router.delete("/:id", (req, res)=>{
+  const id = +req.params.id
+  bank.delete(id)
+  res.status(200).send("se eliminó con exito")
 })
 
 module.exports = router

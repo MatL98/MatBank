@@ -7,7 +7,6 @@ import List from "./List/ListOperations";
 
 const Home = () => {
   const [operation, setOperations] = useState([]);
-  const [selected, setSelected] = useState(0);
 
   const getApi = () => {
     axios.get("http://localhost:3001/home").then(function (response) {

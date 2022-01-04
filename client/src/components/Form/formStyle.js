@@ -114,3 +114,24 @@ export const PopUp = styled.div`
 		letter-spacing: 1px;
 	}
 `;
+export const PopUp2 = styled.div`
+	display: flex;
+	align-items: center;
+	margin-top: 2rem;	
+	height: 2.2rem;
+	border-radius: 35px;
+	background: rgba(255, 255, 255, 0.2);
+	padding: 0.5rem 1.2rem;
+	border-top: 1px solid rgba(255, 255, 255, 0.1);
+	border-left: 1px solid rgba(255, 255, 255, 0.1);
+	box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
+
+
+
+	p{
+		color: white;
+		font-size: 1.3rem;
+		font-weight: 600;
+		letter-spacing: 1px;
+	}
+`;
