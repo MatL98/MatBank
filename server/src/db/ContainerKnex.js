@@ -7,12 +7,30 @@ class Bank {
 
   save = async (op) => {
     try {
-      const opSaved = knex("operations").insert(op);
+      const opSaved = await knex("operations").insert(op);
       return opSaved;
     } catch (error) {
       console.log(error);
     }
   };
+  
+  saveUsr = async (usr) => {
+    try {
+      const usrSaved = await knex("users").insert(usr);
+      return usrSaved;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  getUser = async (id) =>{
+    try {
+      const getUsr = await knex("users").where({id: id})
+      return getUsr
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   update = async (id, updateOp) => {
     try {
