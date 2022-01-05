@@ -24,7 +24,7 @@ const Home = () => {
     <HomeStyle>
       <BalanceDiv>
         <h1>HOME</h1>
-        <a href="/form">Realizar operacion</a>
+        <a href="/form">Realizar operación</a>
         <Balance data={operation.sum}/>
       </BalanceDiv>
       
@@ -35,7 +35,7 @@ const Home = () => {
             <th scope="col">Concepto</th>
             <th scope="col">Monto</th>
             <th scope="col">Fecha</th>
-            <th scope="col">Operacion</th>
+            <th scope="col">Operación</th>
           </tr>
           </thead>
         <tbody>

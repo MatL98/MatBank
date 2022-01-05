@@ -14,7 +14,6 @@ const Form = () => {
     setShowMessage(false)
     setFailForm('')
   }
-  console.log(datos);
   const handleFormSubmit = () => {
     if (datos.concept && datos.amount && datos.type) {
       axios
@@ -47,6 +46,7 @@ const Form = () => {
           name="concept"
           placeholder="Concepto"
           id="concept"
+          maxLength="9"
           value={datos.concept}
           onChange={(e) => setDatos({ ...datos, concept: e.target.value })}
         />
@@ -55,6 +55,7 @@ const Form = () => {
           name="amount"
           placeholder="Monto"
           id="amount"
+          maxLength="9"
           value={datos.amount}
           onChange={(e) => setDatos({ ...datos, amount: e.target.value })}
         />
@@ -64,11 +65,12 @@ const Form = () => {
           value={datos.type}
           onChange={(e) => setDatos({ ...datos, type: e.target.value })}
         >
-          <option>Elige la operacion</option>
+          <option>Elige la operación</option>
           <option value="entry">Ingresar</option>
           <option value="cashOut">Retirar</option>
         </Select>
         <input type="button" value="Enviar" onClick={handleFormSubmit} />
+        <input type="reset" value="Borrar" onClick={()=> setDatos({concept: "",amount: "",type: "",})}/>
       </FormStyle>
       <PopUp style={{ visibility: showMessage ? "visible" : "hidden" }}>
         <p>

@@ -15,7 +15,7 @@ router.get("/home", async (req, res)=>{
   })
 
 
-router.post("/form", (req, res)=>{
+router.post("/form", async (req, res)=>{
   const {concept, amount, type} = req.body
   const operation = {
     concept: concept,
@@ -42,7 +42,7 @@ router.post("/form", (req, res)=>{
       }
     }
   
-  checkType(operation)
+  await checkType(operation)
 })
 
 router.patch("/:id", (req, res)=>{

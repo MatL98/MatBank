@@ -31,8 +31,8 @@ const List = ({data}) =>{
   return(
     <TrStyle>
       <ListStyle>{op.id}</ListStyle>
-      <ListStyle><input type="text" id="conceptOp" name="concept" placeholder="concepto" value={updtOperation.concept} onChange={(e)=> setUpdtOperation({...updtOperation, concept: e.target.value})}/></ListStyle>
-      <ListStyle><input type="number" id="amountOp" name="amount" placeholder="0" value={updtOperation.amount} onChange={(e)=> setUpdtOperation({...updtOperation, amount: e.target.value})}/></ListStyle>
+      <ListStyle><input type="text" id="conceptOp" name="concept" maxLength="9" placeholder="concepto" value={updtOperation.concept} onChange={(e)=> setUpdtOperation({...updtOperation, concept: e.target.value})}/></ListStyle>
+      <ListStyle><input type="number" id="amountOp" name="amount" maxLength="9" placeholder="0" value={updtOperation.amount} onChange={(e)=> setUpdtOperation({...updtOperation, amount: e.target.value})}/></ListStyle>
       <ListStyle>{op.date}</ListStyle>
       <ListStyle>{op.type}</ListStyle>
       <ButtonStyle onClick={updateOp}>Editar</ButtonStyle>
