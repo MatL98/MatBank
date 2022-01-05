@@ -7,7 +7,7 @@ const Balance = (prop) =>{
 
   return(
       <CardStyle>
-        <ContentStyle>Balance de la cuenta</ContentStyle>
+        <ContentStyle>Saldo de la cuenta</ContentStyle>
         <ContentStyleCash>${cashBalance}</ContentStyleCash>
       </CardStyle>
   )

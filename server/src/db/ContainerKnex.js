@@ -1,49 +1,46 @@
-
-const knex = require("../db/db")
+const knex = require("../db/db");
 
 class Bank {
   constructor(table) {
     this.table = table;
   }
 
-  save = (op) => {
-    knex("operations")
-      .insert(op)
-      .then((data) => {
-        return data;
-      })
-      .catch((err) => console.log(err));
+  save = async (op) => {
+    try {
+      const opSaved = knex("operations").insert(op);
+      return opSaved;
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  getAll = () => {
-    const newData = knex("operations").select("*").orderBy("id", "desc").limit("10");
-    const data = JSON.parse(newData)
-    return data;
+  update = async (id, updateOp) => {
+    try {
+      const updt = await knex("operations")
+        .where({ id: id })
+        .update({ concept: updateOp.concept, amount: updateOp.amount });
+      return updt;
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  update =  (id, updateOp) => {
-    knex("operations")
-      .where({ id: id })
-      .update({ concept: updateOp.concept, amount: updateOp.amount })
-      .then((data)=> console.log({data}))
-      .catch((err) => err);
+  sumCash = async () => {
+    try {
+      const sum = await knex("operations").sum({ total: "amount" });
+      return sum[0].total;
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  addCash = () => {
-    knex("operations")
-      .sum({ total: "amount" })
-      .then((data) => {
-        data.map((x) => (x.total));
-      })
-      .catch((err) => err);
-  };
-
-  delete =  (id) => {
-    knex("operations")
-      .where({ id: id })
-      .delete()
-      .then((data)=> console.log({data}))
-      .catch((err) => err);
+  delete = async (id) => {
+    try {
+      const dlt = await knex("operations").where({ id: id }).delete();
+      return dlt;
+    } catch (error) {
+      console.log(error);
+    }
   };
 }
 

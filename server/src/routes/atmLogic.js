@@ -10,8 +10,8 @@ const bank = new Container()
 
 router.get("/home", async (req, res)=>{
   const results = await knex.from("operations").select("*").orderBy('id','desc').limit("10")
-  const sum = await knex('operations').sum({total: 'amount'})
-  res.json({data: results, sum: sum[0].total})
+  const sum = await bank.sumCash()
+  res.json({data: results, sum: sum})
   })
 
 
@@ -24,20 +24,20 @@ router.post("/form", (req, res)=>{
     type: type
   }
   
-  const checkType = (operation) =>{
-    let cash = 0
+  const checkType = async (operation) =>{
+    let cash = await bank.sumCash()
     if ( operation.type === 'entry' ) {
-        bank.save(operation)
-        cash = bank.addCash()
+        await bank.save(operation)
+        await bank.sumCash()
       } else if(operation.type === 'cashOut'){
         const newOp = {...operation,
           amount: -Math.abs(operation.amount)
         }
-        if ( cash === 0 || cash > newOp.amount) {
-          res.json("No puedes retirar este monto")
+        if (cash != null || cash > operation.amount ) {
+          await bank.save(newOp)
+          await bank.sumCash()
         } else{
-          bank.save(newOp)
-          bank.addCash()
+          res.json("No puedes retirar este monto")
         }
       }
     }
