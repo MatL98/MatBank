@@ -8,7 +8,7 @@ const bank = new Container()
 
 
 
-router.get("/home", async (req, res)=>{
+router.get("/home",async (req, res)=>{
   const results = await knex.from("operations").select("*").orderBy('id','desc').limit("10")
   const sum = await bank.sumCash()
   res.json({data: results, sum: sum})

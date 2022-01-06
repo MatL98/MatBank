@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import { TitleDiv, ContainerForm, FormStyle, PopUp, PopUp2 } from "./loginStyle";
 
 const Login = () => {
   const [showMessage, setShowMessage] = useState(false);
   const [failForm, setFailForm] = useState("");
-  const [mail, setMail] = useState();
+	let navigate = useNavigate();
   const [datos, setDatos] = useState({
     mail: "",
     username: "",
@@ -15,32 +16,41 @@ const Login = () => {
     setShowMessage(false);
     setFailForm("");
   }
-  const handleFormSubmit = () => {
-    if (datos.username && datos.mail && datos.password) {
-      axios
-        .post("http://localhost:3001/login", datos)
-        .then(function (response) {
-          setMail(response.data)
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-      setShowMessage(true);
-      setTimeout(hide, 2000);
-    } else {
-      let msn = "es necesario eligir los tres campos";
-      setFailForm(msn);
-      setTimeout(hide, 2000);
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      if (datos.username && datos.mail && datos.password) {
+        const { data } = await axios.post(
+          "http://localhost:3001/login",
+          datos
+        );
+				console.log(data);
+        if (data === datos.mail) {
+          setShowMessage(true);
+					window.localStorage.setItem(
+						'loggedUserWithMail', JSON.stringify(data)
+					)
+					navigate('/');
+          //window.location.href = "/login";
+        }
+      } else {
+        let msn = "es necesario eligir los tres campos";
+        setFailForm(msn);
+        setTimeout(hide, 2000);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 	
+	//nro1 = cuando logea regresar ok, nr2: guardar ek ok en localStorage, nr3: redirigir a home
 	
-	const loginSession = () => {
+	/* const loginSession = () => {
 		if (mail === datos.mail) {
 			window.location.href="/"
 		}
   };
-	loginSession()
+	loginSession() */
 
   return (
     <ContainerForm>

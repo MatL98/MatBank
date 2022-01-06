@@ -1,17 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
-import {
-  TitleDiv,
-  ContainerForm,
-  FormStyle,
-  PopUp,
-  PopUp2,
-} from "./signStyle"
+import { useNavigate } from "react-router-dom";
+import { TitleDiv, ContainerForm, FormStyle, PopUp, PopUp2 } from "./signStyle";
 
 const SignUp = () => {
   const [showMessage, setShowMessage] = useState(false);
   const [failForm, setFailForm] = useState("");
   const [confirm, setConfirm] = useState();
+  let navigate = useNavigate();
   const [datos, setDatos] = useState({
     mail: "",
     username: "",
@@ -21,39 +17,38 @@ const SignUp = () => {
     setShowMessage(false);
     setFailForm("");
   }
-  const handleFormSubmit = () => {
-    if (datos.username && datos.mail && datos.password) {
-      axios
-        .post("http://localhost:3001/signUp", datos)
-        .then(function (response) {
-          setConfirm(response.data);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-      setShowMessage(true);
-      setTimeout(hide, 2000);
-    } else {
-      let msn = "es necesario eligir los tres campos";
-      setFailForm(msn);
-      setTimeout(hide, 2000);
+  const handleFormSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      if (datos.username && datos.mail && datos.password) {
+        const { data } = await axios.post(
+          "http://localhost:3001/signUp",
+          datos
+        );
+        if (data === "ok") {
+          setConfirm(data);
+          setShowMessage(true);
+					navigate('/login');
+          //window.location.href = "/login";
+        }
+      } else {
+        let msn = "es necesario eligir los tres campos";
+        setFailForm(msn);
+        setTimeout(hide, 2000);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
-	
-	const sendLogin = () => {
-		if (confirm === "ok") {
-			window.location.href="/login"
-		}else if (confirm === "no"){
-			window.location.href="/signUp"
-		}
-  };
-	sendLogin()
+
 
   return (
     <ContainerForm>
       <TitleDiv>
         <h1>Registrate</h1>
-        <p>Tenes una cuenta? Ingresa a <a href="/login">Login</a></p>
+        <p>
+          Tenes una cuenta? Ingresa a <a href="/login">Login</a>
+        </p>
       </TitleDiv>
       <FormStyle>
         <h2>Formulario</h2>
@@ -65,7 +60,7 @@ const SignUp = () => {
           value={datos.amount}
           onChange={(e) => setDatos({ ...datos, mail: e.target.value })}
         />
-				<input
+        <input
           type="text"
           name="username"
           placeholder="username"
