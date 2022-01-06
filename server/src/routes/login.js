@@ -3,9 +3,11 @@ const { Router } = express
 const router = new Router()
 const passport = require('passport')
 
-router.get("/login" ,(req, res)=>{
-    res.send("hola")
-})
+router.post("/login" , passport.authenticate('local-login' ,{
+    successRedirect: '/localhost:3000',
+    failureRedirect: '/login',
+    failureFlash: true
+}))
 
 router.post("/signUp" , passport.authenticate('local-signUp', {
     successRedirect: '/login',

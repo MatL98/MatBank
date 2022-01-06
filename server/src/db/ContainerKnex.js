@@ -31,6 +31,15 @@ class Bank {
       console.log(error);
     }
   }
+  
+  getUserMail = async (mail) =>{
+    try {
+      const getUsr = await knex("users").where({mail: mail})
+      return getUsr
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   update = async (id, updateOp) => {
     try {
