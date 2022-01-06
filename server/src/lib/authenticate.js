@@ -21,7 +21,6 @@ passport.use(
         const pass = await encrypt.comparePassword(password, user.password);
         if (pass) {
           done(null, user);
-          console.log("funciona");
         } else {
           done(null, false);
         }
