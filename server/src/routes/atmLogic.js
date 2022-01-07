@@ -7,9 +7,9 @@ const Container = require("../db/ContainerKnex");
 const bank = new Container();
 
 router.get("/home", async (req, res) => {
-  const results = await knex
-    .from("operations")
-    .select("*")
+  const results = await knex("users")
+    .join("operations", "users.id", "=", "operations.userId")
+    .select("operations.*")
     .orderBy("id", "desc")
     .limit("10");
   const sum = await bank.sumCash();
@@ -23,6 +23,7 @@ router.post("/form", async (req, res) => {
     amount: amount,
     date: moment().format("D/MM/YY"),
     type: type,
+    userId: 1
   };
 
   const checkType = async (operation) => {

@@ -20,11 +20,11 @@ const App = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/login" element={<Login />} />
-        <Route path="/signUp" element={<SignUp />} />
-        {loggedIn ? <Route path="/home" element={<Home />}/> : <Route path="/" element={<Navigate to={"/login"}/>}/>}
-        <Route path="/form" element={<Form />} />
-        <Route path="*" element={<PageNotFound />} />
+        <Route exact path="/login" element={<Login />} />
+        <Route exact path="/signUp" element={<SignUp />} />
+        {loggedIn ? <Route exact path="/home" element={<Home />}/> : <Route exact path="/" element={<Navigate to={"/login"}/>}/>}
+        <Route exact path="/form" element={<Form />} />
+        <Route path="/*" element={<PageNotFound />} /> 
       </Routes>
     </Router>
   );
