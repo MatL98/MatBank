@@ -10,10 +10,11 @@ export const HomeStyle = styled.div`
 
   @media screen and (min-width: 480px) {
     {
-      margin: 2rem;
+      justify-content: center;
+      align-items: center;
     }
   }
-`
+` 
 export const BalanceDiv = styled.div`
   
   display: flex;
@@ -30,6 +31,7 @@ export const TableStyle = styled.table`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   border-collapse: collapse;
   border-radius: 5px;
   margin: 1.6rem 0rem;
@@ -37,15 +39,30 @@ export const TableStyle = styled.table`
   overflow: hidden;
 
   
-  thead tr{
+  thead > tr{
     background-color: #7729ee;
     color: white;
     text-align: center;
-    border-radius: 10px 10px 0 0;
     font-weight: bold;
+
+  }
+  tbody{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 
-  td, th{
+  @media screen and (min-width: 480px) {
+    {
+      width: 35%;
+    }
+    tbody{
+      width: 100%;
+    }
+  }
+
+  th{
     padding: 0.5rem 0.5rem;
   }
 

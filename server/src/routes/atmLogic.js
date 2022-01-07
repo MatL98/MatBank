@@ -21,7 +21,7 @@ router.post("/form", async (req, res) => {
   const operation = {
     concept: concept,
     amount: amount,
-    date: moment().format("D/MM/YY, h:mm:ss"),
+    date: moment().format("D/MM/YY"),
     type: type,
   };
 
@@ -30,7 +30,7 @@ router.post("/form", async (req, res) => {
     if (operation.type === "entry") {
       await bank.save(operation);
       await bank.sumCash();
-    } else if (operation.type === "cashOut") {
+    } else if (operation.type === "out") {
       const newOp = { ...operation, amount: -Math.abs(operation.amount) };
       if (cash != null || cash > operation.amount) {
         await bank.save(newOp);

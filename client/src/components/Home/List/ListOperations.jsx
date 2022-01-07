@@ -8,7 +8,7 @@ const List = ({data}) =>{
   
   
   const updateOp = () =>{
-    axios.patch(`http://localhost:3001/${updtOperation.id}`, updtOperation)
+    axios.patch(`http://localhost:3001/api/${updtOperation.id}`, updtOperation)
     .then(function (response) {
       console.log(response);
     })
@@ -18,7 +18,7 @@ const List = ({data}) =>{
   }
   
   const deleteOp = () =>{
-    axios.delete(`http://localhost:3001/${op.id}`)
+    axios.delete(`http://localhost:3001/api/${op.id}`)
     .then(function (response) {
       console.log(response);
     })

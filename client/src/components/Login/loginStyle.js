@@ -4,6 +4,13 @@ export const ContainerForm = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0.5rem;
+
+  @media screen and (min-width: 480px) {
+    {
+      justify-content: center;
+      align-items: center;
+    }
+  }
 `;
 
 export const FormStyle = styled.form`

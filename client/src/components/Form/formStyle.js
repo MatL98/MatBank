@@ -4,6 +4,13 @@ export const ContainerForm = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0.5rem;
+  @media screen and (min-width: 480px) {
+    {
+      margin: 0.5rem;
+      justify-content: center;
+      align-items: center;
+    }
+  }
 `;
 
 export const FormStyle = styled.form`
@@ -96,7 +103,7 @@ export const PopUp = styled.div`
 	display: flex;
 	align-items: center;
 	margin-top: 2rem;	
-	height: 2.2rem;	
+	height: 2.5rem;	
 	width: 50%;
 	border-radius: 35px;
 	background: rgba(255, 255, 255, 0.2);
@@ -118,7 +125,7 @@ export const PopUp2 = styled.div`
 	display: flex;
 	align-items: center;
 	margin-top: 2rem;	
-	height: 2.2rem;
+	height: 3rem;
 	border-radius: 35px;
 	background: rgba(255, 255, 255, 0.2);
 	padding: 0.5rem 1.2rem;

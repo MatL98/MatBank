@@ -44,7 +44,7 @@ const SignUp = () => {
         </p>
       </TitleDiv>
       <FormStyle>
-        <h2>Formulario</h2>
+        <h2>Formulario de registro</h2>
         <input
           type="text"
           name="mail"

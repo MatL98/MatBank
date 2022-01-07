@@ -74,7 +74,7 @@ const Form = () => {
         >
           <option>Elige la operación</option>
           <option value="entry">Ingresar</option>
-          <option value="cashOut">Retirar</option>
+          <option value="out">Retirar</option>
         </Select>
         <input type="button" value="Enviar" onClick={handleFormSubmit} />
         <input
