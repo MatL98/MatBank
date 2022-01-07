@@ -24,7 +24,7 @@ const Home = () => {
     let logged = window.localStorage.getItem("loggedUserWithMail");
     if (logged) {
     window.localStorage.removeItem("loggedUserWithMail")
-    navigate("/")
+    navigate("/login")
   }
 }
 
