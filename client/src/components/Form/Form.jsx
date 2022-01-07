@@ -17,7 +17,7 @@ const Form = () => {
   const handleFormSubmit = () => {
     if (datos.concept && datos.amount && datos.type) {
       axios
-        .post("http://localhost:3001/form", datos)
+        .post("http://localhost:3001/api/form", datos)
         .then(function (response) {
           console.log(response);
         })

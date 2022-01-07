@@ -9,7 +9,7 @@ const Home = () => {
   const [operation, setOperations] = useState([]);
 
   const getApi = () => {
-    axios.get("http://localhost:3001/home").then(function (response) {
+    axios.get("http://localhost:3001/api/home").then(function (response) {
       console.log(response.data);
       setOperations(response.data);
       return response;

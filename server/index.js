@@ -30,7 +30,7 @@ app.use(cors())
 
 
 app.use("/", routerLogin)
-app.use("/", routerAtm)
+app.use("/api", routerAtm)
 
 app.listen(port, ()=>{
   console.log(`Server is running on ${port}`)
