@@ -3,10 +3,11 @@ import Balance from "./Balance/Balance";
 import { HomeStyle, BalanceDiv, TableStyle } from "./homeStyles";
 import axios from "axios";
 import List from "./List/ListOperations";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [operation, setOperations] = useState([]);
+  let navigate = useNavigate();
 
   const getApi = () => {
     axios.get("http://localhost:3001/api/home").then(function (response) {
@@ -19,12 +20,20 @@ const Home = () => {
     getApi();
   }, []);
 
+  const logOut = () => {
+    let logged = window.localStorage.getItem("loggedUserWithMail");
+    if (logged) {
+    window.localStorage.removeItem("loggedUserWithMail")
+    navigate("/")
+  }
+}
+
   return (
     <HomeStyle>
       <BalanceDiv>
         <h1>HOME</h1>
         <Link to={"/form"}>Realizar Operación</Link>
-        <Link to={"/logOut"}>Log-out</Link>
+        <button onClick={logOut}>Log-out</button>
         <Balance data={operation.sum} />
       </BalanceDiv>
 

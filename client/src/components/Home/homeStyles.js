@@ -19,10 +19,20 @@ export const BalanceDiv = styled.div`
   
   display: flex;
   flex-direction: column;
+  justify-content: left;
 
   a{
     color: white;
     text-transform: capitalize;
+  }
+  
+  button{
+    background: none;
+    border: none;
+    color: white;
+    width: 50%;
+    text-align: left;
+    text-decoration: underline;
   }
 `
 
