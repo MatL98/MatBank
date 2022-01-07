@@ -1,6 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { TitleDiv, ContainerForm, FormStyle, Select, PopUp, PopUp2 } from "./formStyle";
+import {
+  TitleDiv,
+  ContainerForm,
+  FormStyle,
+  Select,
+  PopUp,
+  PopUp2,
+} from "./formStyle";
 
 const Form = () => {
   const [showMessage, setShowMessage] = useState(false);
@@ -10,9 +17,9 @@ const Form = () => {
     amount: "",
     type: "",
   });
-  function hide(){
-    setShowMessage(false)
-    setFailForm('')
+  function hide() {
+    setShowMessage(false);
+    setFailForm("");
   }
   const handleFormSubmit = () => {
     if (datos.concept && datos.amount && datos.type) {
@@ -25,11 +32,11 @@ const Form = () => {
           console.log(error);
         });
       setShowMessage(true);
-      setTimeout(hide, 2000)
+      setTimeout(hide, 2000);
     } else {
-      let msn = "es necesario eligir los tres campos"
+      let msn = "es necesario eligir los tres campos";
       setFailForm(msn);
-      setTimeout(hide, 2000)
+      setTimeout(hide, 2000);
     }
   };
 
@@ -70,7 +77,11 @@ const Form = () => {
           <option value="cashOut">Retirar</option>
         </Select>
         <input type="button" value="Enviar" onClick={handleFormSubmit} />
-        <input type="reset" value="Borrar" onClick={()=> setDatos({concept: "",amount: "",type: "",})}/>
+        <input
+          type="reset"
+          value="Borrar"
+          onClick={() => setDatos({ concept: "", amount: "", type: "" })}
+        />
       </FormStyle>
       <PopUp style={{ visibility: showMessage ? "visible" : "hidden" }}>
         <p>
@@ -79,11 +90,8 @@ const Form = () => {
             : `Retiraste ${datos.amount}`}
         </p>
       </PopUp>
-      <PopUp2 style={{ visibility: failForm ? "visible" : "hidden" }} >
-        <p>
-          {failForm
-            ? `${failForm}` : ''}
-        </p>
+      <PopUp2 style={{ visibility: failForm ? "visible" : "hidden" }}>
+        <p>{failForm ? `${failForm}` : ""}</p>
       </PopUp2>
     </ContainerForm>
   );

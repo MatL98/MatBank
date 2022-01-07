@@ -78,7 +78,7 @@ export const PopUp = styled.div`
   align-items: center;
   margin-top: 2rem;
   height: 2.2rem;
-  width: 50%;
+  width: 100%;
   border-radius: 35px;
   background: rgba(255, 255, 255, 0.2);
   padding: 0.5rem 1.2rem;

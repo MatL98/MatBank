@@ -1,12 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { TitleDiv, ContainerForm, FormStyle, PopUp, PopUp2 } from "./signStyle";
+import { TitleDiv, ContainerForm, FormStyle, PopUp2 } from "./signStyle";
 
 const SignUp = () => {
-  const [showMessage, setShowMessage] = useState(false);
   const [failForm, setFailForm] = useState("");
-  const [confirm, setConfirm] = useState();
   let navigate = useNavigate();
   const [datos, setDatos] = useState({
     mail: "",
@@ -14,7 +12,6 @@ const SignUp = () => {
     password: "",
   });
   function hide() {
-    setShowMessage(false);
     setFailForm("");
   }
   const handleFormSubmit = async (e) => {
@@ -26,10 +23,7 @@ const SignUp = () => {
           datos
         );
         if (data === "ok") {
-          setConfirm(data);
-          setShowMessage(true);
-					navigate('/login');
-          //window.location.href = "/login";
+          navigate("/login");
         }
       } else {
         let msn = "es necesario eligir los tres campos";
@@ -40,7 +34,6 @@ const SignUp = () => {
       console.log(error);
     }
   };
-
 
   return (
     <ContainerForm>
@@ -84,13 +77,6 @@ const SignUp = () => {
           onClick={() => setDatos({ concept: "", amount: "", type: "" })}
         />
       </FormStyle>
-      <PopUp style={{ visibility: showMessage ? "visible" : "hidden" }}>
-        <p>
-          {datos.type === "entry"
-            ? `Ingresaste ${datos.amount}`
-            : `Retiraste ${datos.amount}`}
-        </p>
-      </PopUp>
       <PopUp2 style={{ visibility: failForm ? "visible" : "hidden" }}>
         <p>{failForm ? `${failForm}` : ""}</p>
       </PopUp2>

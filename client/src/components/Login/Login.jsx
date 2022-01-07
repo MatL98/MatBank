@@ -1,12 +1,18 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { TitleDiv, ContainerForm, FormStyle, PopUp, PopUp2 } from "./loginStyle";
+import {
+  TitleDiv,
+  ContainerForm,
+  FormStyle,
+  PopUp,
+  PopUp2,
+} from "./loginStyle";
 
 const Login = () => {
   const [showMessage, setShowMessage] = useState(false);
   const [failForm, setFailForm] = useState("");
-	let navigate = useNavigate();
+  let navigate = useNavigate();
   const [datos, setDatos] = useState({
     mail: "",
     username: "",
@@ -20,19 +26,17 @@ const Login = () => {
     e.preventDefault();
     try {
       if (datos.username && datos.mail && datos.password) {
-        const { data } = await axios.post(
-          "http://localhost:3001/login",
-          datos
-        );
-				console.log(data);
+        const { data } = await axios.post("http://localhost:3001/login", datos);
+        console.log(data);
         if (data === datos.mail) {
-          setShowMessage(true);
-					window.localStorage.setItem(
-						'loggedUserWithMail', JSON.stringify(data)
-					)
-					navigate('/home');
-          //window.location.href = "/login";
+          window.localStorage.setItem(
+            "loggedUserWithMail",
+            JSON.stringify(data)
+          );
+          navigate("/home");
         }
+        setShowMessage(true);
+        setTimeout(hide, 2000);
       } else {
         let msn = "es necesario eligir los tres campos";
         setFailForm(msn);
@@ -42,15 +46,6 @@ const Login = () => {
       console.log(error);
     }
   };
-	
-	//nro1 = cuando logea regresar ok, nr2: guardar ek ok en localStorage, nr3: redirigir a home
-	
-	/* const loginSession = () => {
-		if (mail === datos.mail) {
-			window.location.href="/"
-		}
-  };
-	loginSession() */
 
   return (
     <ContainerForm>
@@ -70,7 +65,7 @@ const Login = () => {
           value={datos.amount}
           onChange={(e) => setDatos({ ...datos, mail: e.target.value })}
         />
-				<input
+        <input
           type="text"
           name="username"
           placeholder="username"
@@ -95,11 +90,7 @@ const Login = () => {
         />
       </FormStyle>
       <PopUp style={{ visibility: showMessage ? "visible" : "hidden" }}>
-        <p>
-          {datos.type === "entry"
-            ? `Ingresaste ${datos.amount}`
-            : `Retiraste ${datos.amount}`}
-        </p>
+        <p>Usuario y/o Contraseña invalida</p>
       </PopUp>
       <PopUp2 style={{ visibility: failForm ? "visible" : "hidden" }}>
         <p>{failForm ? `${failForm}` : ""}</p>
