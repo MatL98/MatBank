@@ -3,6 +3,7 @@ import Balance from "./Balance/Balance";
 import { HomeStyle, BalanceDiv, TableStyle } from "./homeStyles";
 import axios from "axios";
 import List from "./List/ListOperations";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const [operation, setOperations] = useState([]);
@@ -22,8 +23,8 @@ const Home = () => {
     <HomeStyle>
       <BalanceDiv>
         <h1>HOME</h1>
-        <a href="/form">Realizar operación</a>
-        <a href="/logOut">LogOut</a>
+        <Link to={"/form"}>Realizar Operación</Link>
+        <Link to={"/logOut"}>Log-out</Link>
         <Balance data={operation.sum} />
       </BalanceDiv>
 

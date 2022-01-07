@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import {
   TitleDiv,
   ContainerForm,
@@ -44,7 +45,7 @@ const Form = () => {
     <ContainerForm>
       <TitleDiv>
         <h1>Ingresar Operaciones</h1>
-        <a href="/home">Regresar al home</a>
+        <Link to={"/"}>Regresar al home</Link>
       </TitleDiv>
       <FormStyle>
         <h2>Formulario</h2>

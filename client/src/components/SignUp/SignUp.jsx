@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { TitleDiv, ContainerForm, FormStyle, PopUp2 } from "./signStyle";
 
 const SignUp = () => {
@@ -40,7 +40,7 @@ const SignUp = () => {
       <TitleDiv>
         <h1>Registrate</h1>
         <p>
-          Tenes una cuenta? Ingresa a <a href="/login">Login</a>
+          Tenes una cuenta? Ingresa a <Link to={"/login"}>Inicia Sesión</Link>
         </p>
       </TitleDiv>
       <FormStyle>

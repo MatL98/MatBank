@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import {
   TitleDiv,
   ContainerForm,
@@ -33,7 +33,7 @@ const Login = () => {
             "loggedUserWithMail",
             JSON.stringify(data)
           );
-          navigate("/home");
+          navigate("/");
         }
         setShowMessage(true);
         setTimeout(hide, 2000);
@@ -52,7 +52,7 @@ const Login = () => {
       <TitleDiv>
         <h1>Inicia sesion</h1>
         <p>
-          No tenes una cuenta? Ingresa a <a href="/signUp">SignUp</a>
+          No tenes una cuenta? Ingresa a <Link to={"/signUp"}>Registrate</Link>
         </p>
       </TitleDiv>
       <FormStyle>
