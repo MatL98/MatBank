@@ -45,7 +45,7 @@ const Form = () => {
     <ContainerForm>
       <TitleDiv>
         <h1>Ingresar Operaciones</h1>
-        <Link to={"/"}>Regresar al home</Link>
+        <Link to={"/home"}>Regresar al home</Link>
       </TitleDiv>
       <FormStyle>
         <h2>Formulario</h2>

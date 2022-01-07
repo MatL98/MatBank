@@ -33,7 +33,7 @@ const Login = () => {
             "loggedUserWithMail",
             JSON.stringify(data)
           );
-          navigate("/");
+          navigate("/home");
         }
         setShowMessage(true);
         setTimeout(hide, 2000);
