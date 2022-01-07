@@ -7,7 +7,6 @@ import List from "./List/ListOperations";
 
 const Home = () => {
   const [operation, setOperations] = useState([]);
-  //state es loguaedo? false al inicio
 
   const getApi = () => {
     axios.get("http://localhost:3001/home").then(function (response) {
@@ -16,16 +15,9 @@ const Home = () => {
       return response;
     });
   };
-  /* const auth = () =>{
-    if (operation === 'false') {
-      window.location.href='/login'
-    }
-  }
-  auth() */
   
   useEffect(() => {
     getApi();
-    //buscar el user, if user  show : redirect
   }, []);
 
   return (
@@ -33,6 +25,7 @@ const Home = () => {
       <BalanceDiv>
         <h1>HOME</h1>
         <a href="/form">Realizar operación</a>
+        <a href="/logOut">LogOut</a>
         <Balance data={operation.sum}/>
       </BalanceDiv>
       

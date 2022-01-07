@@ -16,14 +16,14 @@ const App = () => {
     if (logged) {
       setLoggedIn(true)
     }
-  },[])
+  },[useEffect])
 
   return (
     <Router>
       <Routes>
         <Route path="/login" element={<Login />}/>
         <Route path="/signUp" element={<SignUp />} />
-        {!loggedIn ? '' : <Route path="/" element={<Home />}/>}
+        {!loggedIn ? <Route path="/" element={<Login />}/> : <Route path="/home" element={<Home />}/>}
         <Route path="/form" element={<Form />} />
       </Routes>
     </Router>

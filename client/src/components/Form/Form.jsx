@@ -37,7 +37,7 @@ const Form = () => {
     <ContainerForm>
       <TitleDiv>
         <h1>Ingresar Operaciones</h1>
-        <a href="/">Regresar al home</a>
+        <a href="/home">Regresar al home</a>
       </TitleDiv>
       <FormStyle>
         <h2>Formulario</h2>

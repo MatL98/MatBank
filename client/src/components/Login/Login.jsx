@@ -30,7 +30,7 @@ const Login = () => {
 					window.localStorage.setItem(
 						'loggedUserWithMail', JSON.stringify(data)
 					)
-					navigate('/');
+					navigate('/home');
           //window.location.href = "/login";
         }
       } else {
