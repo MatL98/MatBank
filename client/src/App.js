@@ -22,9 +22,9 @@ const App = () => {
       <Routes>
         <Route exact path="/login" element={<Login />} />
         <Route exact path="/signUp" element={<SignUp />} />
-        {loggedIn ? <Route exact path="/home" element={<Home />}/> : <Route exact path="/" element={<Navigate to={"/login"}/>}/>}
+        {loggedIn ? <Route exact path="/home" element={<Home />} /> : <Route path="/" element={<Navigate to={"/login"}/>}/>}
         <Route exact path="/form" element={<Form />} />
-        <Route path="/*" element={<PageNotFound />} /> 
+        <Route path="/*" element={<PageNotFound />} />
       </Routes>
     </Router>
   );

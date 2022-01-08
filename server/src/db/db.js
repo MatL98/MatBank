@@ -16,8 +16,6 @@ knex.schema.createTableIfNotExists("operations", function(table){
   table.float("amount");
   table.string("date");
   table.string("type");
-  table.integer("userId").unsigned();
-  table.index('userId')
 })
 .then(()=>{
   console.log("created table");
