@@ -3,7 +3,6 @@ const LocalStrategy = require("passport-local").Strategy;
 const Container = require("../db/ContainerDB");
 const bank = new Container();
 const encrypt = require("./encrypt");
-const User = require("../Models/user");
 
 passport.use(
   "local-login",
@@ -15,9 +14,8 @@ passport.use(
     },
     async (req, username, password, done) => {
       const { mail } = req.body;
-      const result = await bank.getUserMail(1);
-      //console.log(result);
-      if (result[0]) {
+      const result = await bank.getUserMail(mail);
+      if (result[0].dataValues) {
         const user = result[0];
         const pass = await encrypt.comparePassword(password, user.password);
         if (pass) {
@@ -48,9 +46,8 @@ passport.use(
         password,
       };
       newUser.password = await encrypt.encryptPassword(password);
-      const result = await User.create(newUser)
-      console.log(result + "asdasdsadad");
-      //newUser.id = result[0];
+      const result = await bank.saveUsr(newUser)
+      newUser.id = result[0].dataValues;
       return done(null, newUser);
     }
   )

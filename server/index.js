@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const port = process.env.PORT || 3001;
-const sequelize = require("./src/db/db");
+const sequelize = require("./src/db/db")
 const routerAtm = require("./src/routes/atmLogic");
 const routerLogin = require("./src/routes/login");
 const cookieParser = require("cookie-parser");

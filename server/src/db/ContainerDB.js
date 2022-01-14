@@ -15,7 +15,7 @@ class Bank {
   
   saveUsr = async (usr) => {
     try {
-      const usrSaved = await User.create();
+      const usrSaved = await User.create(usr)
       return usrSaved;
     } catch (error) {
       console.log(error);
@@ -31,10 +31,10 @@ class Bank {
     }
   }
   
-  getUserMail = async (id) =>{
+  getUserMail = async (mail) =>{
     try {
-      const getUsr = await User.findAll({where:{id:id}})
-      return getUsr;
+      const getUsr = await User.findAll({where:{mail:mail}})
+      return getUsr
     } catch (error) {
       console.log(error);
     }

@@ -1,17 +1,27 @@
-const  { DataTypes } = require("sequelize");
+const { DataTypes } = require("sequelize");
 const db = require("../db/db");
 
+const User = db.define(
+  "User",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    mail: DataTypes.STRING,
+    username: DataTypes.STRING,
+    password: DataTypes.STRING,
+  },
+  {
+    timestamps: false,
+  }
+);
 
-const User = db.define('User', {
-    mail:{
-        type: DataTypes.STRING
-    },
-    username:{
-        type: DataTypes.STRING
-    },
-    password:{
-        type: DataTypes.STRING
-    }
-    })
+User.sync({ alter: true })
+  .then(() => {
+    console.log("Tabla creada");
+  })
+  .catch((err) => err);
 
 module.exports = User;
