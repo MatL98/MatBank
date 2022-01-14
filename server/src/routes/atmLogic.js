@@ -2,17 +2,16 @@ const express = require("express");
 const { Router } = express;
 const router = new Router();
 const moment = require("moment");
-const knex = require("../db/db");
-const Container = require("../db/ContainerKnex");
+const Container = require("../db/ContainerDB");
 const bank = new Container();
 
 router.get("/home", async (req, res) => {
-  const results = await knex.from("operations")
+  /* const results = await knex.from("operations")
     .select("*")
     .orderBy("id", "desc")
     .limit("10");
   const sum = await bank.sumCash();
-  res.json({ data: results, sum: sum });
+  res.json({ data: results, sum: sum }); */
 });
 
 router.post("/form", async (req, res) => {

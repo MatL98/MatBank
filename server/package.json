@@ -15,12 +15,12 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-session": "^1.17.2",
-    "knex": "^0.95.14",
     "moment": "^2.29.1",
     "mysql": "^2.18.1",
+    "mysql2": "^2.3.3",
     "passport": "^0.5.2",
     "passport-local": "^1.0.0",
-    "sqlite3": "^5.0.2"
+    "sequelize": "^6.13.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

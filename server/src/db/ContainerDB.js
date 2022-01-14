@@ -1,5 +1,4 @@
-const knex = require("../db/db");
-
+const User = require("../Models/user");
 class Bank {
   constructor(table) {
     this.table = table;
@@ -16,7 +15,7 @@ class Bank {
   
   saveUsr = async (usr) => {
     try {
-      const usrSaved = await knex("users").insert(usr);
+      const usrSaved = await User.create();
       return usrSaved;
     } catch (error) {
       console.log(error);
@@ -32,10 +31,10 @@ class Bank {
     }
   }
   
-  getUserMail = async (mail) =>{
+  getUserMail = async (id) =>{
     try {
-      const getUsr = await knex("users").where({mail: mail})
-      return getUsr
+      const getUsr = await User.findAll({where:{id:id}})
+      return getUsr;
     } catch (error) {
       console.log(error);
     }
