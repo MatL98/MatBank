@@ -15,6 +15,7 @@ passport.use(
     async (req, username, password, done) => {
       const { mail } = req.body;
       const result = await bank.getUserMail(mail);
+      console.log(result[0]);
       if (result[0].dataValues) {
         const user = result[0];
         const pass = await encrypt.comparePassword(password, user.password);
@@ -47,6 +48,7 @@ passport.use(
       };
       newUser.password = await encrypt.encryptPassword(password);
       const result = await bank.saveUsr(newUser)
+      console.log(result[0]);
       newUser.id = result[0].dataValues;
       return done(null, newUser);
     }
