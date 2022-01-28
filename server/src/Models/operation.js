@@ -19,7 +19,7 @@ const Operation = db.define(
   }
 );
 
-Operation.sync({ alter: true })
+Operation.sync()
   .then(() => {
     console.log("Tabla creada");
   })

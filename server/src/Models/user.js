@@ -18,7 +18,7 @@ const User = db.define(
   }
 );
 
-User.sync({ alter: true })
+User.sync()
   .then(() => {
     console.log("Tabla creada");
   })

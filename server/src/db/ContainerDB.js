@@ -1,51 +1,41 @@
 const User = require("../Models/user");
 const Operation = require("../Models/operation");
-const sequelize = require
+
+
 class Bank {
   constructor(table) {
-    this.table = table;
+    if (table === "users") {
+      this.table = User;
+    } else{
+      this.table = Operation
+    }
   }
 
   save = async (op) => {
     try {
-      const opSaved = await Operation.create(op);
-      return opSaved;
+      const saved = await this.table.create(op);
+      const data = JSON.stringify(saved, null, 4)
+      return data;
     } catch (error) {
       console.log(error);
     }
   };
 
-  saveUsr = async (usr) => {
+  getById = async (id) => {
     try {
-      const usrSaved = await User.create(usr);
-      return usrSaved;
+      const getUsr = await this.table.findOne({ id: id });
+      const data = JSON.stringify(getUsr, null, 4)
+      return data;
     } catch (error) {
       console.log(error);
     }
   };
 
-  getUser = async (id) => {
+  getAll = async () => {
     try {
-      const getUsr = await User.findOne({ id: id });
-      return getUsr;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  getUserMail = async (mail) => {
-    try {
-      const getUsr = await User.findAll({ where: { mail: mail } });
-      return getUsr;
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  getOperations = async () => {
-    try {
-      const results = await Operation.findAll();
-      return results;
+      const results = await this.table.findAll();
+      const data = JSON.stringify(results, null, 4)
+      return data
     } catch (error) {
       console.log(error);
     }
@@ -53,7 +43,7 @@ class Bank {
 
   update = async (id, updateOp) => {
     try {
-      const updt = await Operation.findOne({ where: { id: id } }).update({
+      const updt = await this.table.findOne({ where: { id: id } }).update({
         concept: updateOp.concept,
         amount: updateOp.amount,
       });
@@ -65,12 +55,8 @@ class Bank {
 
   sumCash = async () => {
     try {
-      const totalCash = await Operation.findAll({
-        attributes: [
-          [sequelize.fn("sum", Operation.col("amount")), "totalCash"],
-        ],raw: true
-      });
-      return totalCash;
+      const totalCash = await this.table.sum("amount");
+      return totalCash
     } catch (error) {
       console.log(error);
     }
@@ -79,7 +65,7 @@ class Bank {
   delete = async (id) => {
     try {
       const dlt = await (
-        await Operation.findOne({ where: { id: id } })
+        await this.table.findOne({ where: { id: id } })
       ).destroy();
       return dlt;
     } catch (error) {
