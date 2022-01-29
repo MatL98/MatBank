@@ -16,7 +16,17 @@ const Operation = db.define(
   },
   {
     timestamps: false,
-  }
+  },
+  {
+    UserId: DataTypes.INTEGER,
+    allowNull: true,
+    references:{
+      model: "users",
+      key: "id"
+    },
+    onDelete: "CASCADE",
+    onUpdate: "CASCADE"
+  },
 );
 
 module.exports = Operation;

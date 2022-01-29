@@ -20,6 +20,7 @@ router.post("/login", async (req, res, next) => {
 
 router.post("/signUp", (req, res, next) => {
   passport.authenticate("local-signUp", (err, user) => {
+
     if (err) throw err;
     if (!user) {
       res.json("no");

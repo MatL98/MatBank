@@ -3,6 +3,8 @@ const LocalStrategy = require("passport-local").Strategy;
 const Container = require("../dao/daoUser");
 const bank = new Container();
 const encrypt = require("./encrypt");
+const jwt = require("jsonwebtoken")
+require("dotenv").config()
 
 passport.use(
   "local-login",
@@ -21,6 +23,10 @@ passport.use(
         const user = getUser[0];
         const pass = await encrypt.comparePassword(password, user.password);
         if (pass) {
+          let token = jwt.sign({user: user}, process.env.SESSION_SECRET,{
+            expiresIn: "2h"
+          })
+          user.token = token
           done(null, user);
         } else {
           done(null, false);
@@ -50,8 +56,11 @@ passport.use(
       newUser.password = await encrypt.encryptPassword(password);
       const result = await bank.save(newUser)
       const dataParsed = JSON.parse(result)
-      console.log(dataParsed)
       newUser.id = dataParsed.id;
+      let token = jwt.sign({user: newUser}, process.env.SESSION_SECRET,{
+        expiresIn: "2h"
+      })
+      newUser.token = token
       return done(null, newUser);
     }
   )

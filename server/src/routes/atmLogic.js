@@ -6,13 +6,13 @@ const Container = require("../dao/daoOpertaion");
 const bank = new Container();
 
 
-router.get("/home", async (req, res) => {
-  const results = await bank.getAllOp(2)
-  const sum = await bank.sumCash(2)
+router.get("/home",async (req, res) => {
+  const results = await bank.getAllOp()
+  const sum = await bank.sumCash()
   res.json({ data: results, sum: sum  });
 });
 
-router.post("/form", async (req, res) => {
+router.post("/form",async (req, res) => {
   const { concept, amount, type } = req.body;
   const operation = {
     concept: concept,

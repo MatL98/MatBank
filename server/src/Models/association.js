@@ -2,8 +2,8 @@ const User = require("../Models/user");
 const Operation = require("../Models/operation");
 const sequelize = require("../db/db")
 
-User.hasMany(Operation, {foreignKey: "UserId"});
-Operation.belongsTo(User);
+User.hasMany(Operation);
+Operation.belongsTo(User, {constraints: false});
 
 sequelize.sync({ alter: true })
   .then(() => {

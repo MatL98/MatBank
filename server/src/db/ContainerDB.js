@@ -41,9 +41,9 @@ class Bank {
     }
   };
 
-  getAllOp = async (id) => {
+  getAllOp = async () => {
     try {
-      const results = await User.findAll({where: {id: id}, include: [{model: Operation}]});
+      const results = await User.findAll({where: "", include: [{model: Operation}]});
       const data = JSON.stringify(results, null, 4);
       return data;
     } catch (error) {
@@ -65,19 +65,8 @@ class Bank {
 
   sumCash = async () => {
     try {
-      const results = await User.findOne({where: "", include: [{model: Operation}]});
-      const data = JSON.stringify(results, null, 4);
-      const dataOp = JSON.parse(data)
-      const dataSum = dataOp.Operations
-      const cash = dataSum.map((data, idx)=>{
-        let amount = data.amount
-        for (let i = 0; i < dataSum.length; i++) {
-          let sum = amount + amount
-          return sum
-        }
-      })
-      console.log(cash);
-      return cash[0];
+      const sum = await this.table.sum("amount");
+      return sum
     } catch (error) {
       console.log(error);
     }

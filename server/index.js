@@ -20,6 +20,8 @@ async function dbConnection(){
     console.error('Unable to connect to the database:', error);
   }
 }
+
+require("dotenv").config()
 app.use(bodyParser.json({ limit: "10mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 app.use(express.json());
@@ -28,7 +30,7 @@ dbConnection()
 app.use(cookieParser("xhiperMegaSecreTx"));
 app.use(
   session({
-    secret: "xhiperMegaSecreTx",
+    secret: process.env.SESSION_SECRET,
     resave: true,
     saveUninitialized: true,
     cookie: {maxAge: 300000}
