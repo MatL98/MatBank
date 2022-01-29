@@ -2,20 +2,17 @@ const express = require("express");
 const { Router } = express;
 const router = new Router();
 const moment = require("moment");
-const knex = require("../db/db");
-const Container = require("../db/ContainerKnex");
+const Container = require("../dao/daoOpertaion");
 const bank = new Container();
 
-router.get("/home", async (req, res) => {
-  const results = await knex.from("operations")
-    .select("*")
-    .orderBy("id", "desc")
-    .limit("10");
-  const sum = await bank.sumCash();
-  res.json({ data: results, sum: sum });
+
+router.get("/home",async (req, res) => {
+  const results = await bank.getAllOp()
+  const sum = await bank.sumCash()
+  res.json({ data: results, sum: sum  });
 });
 
-router.post("/form", async (req, res) => {
+router.post("/form",async (req, res) => {
   const { concept, amount, type } = req.body;
   const operation = {
     concept: concept,

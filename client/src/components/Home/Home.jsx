@@ -7,12 +7,17 @@ import { Link, useNavigate } from "react-router-dom";
 
 const Home = () => {
   const [operation, setOperations] = useState([]);
+  const [cash, setCash] = useState(0);
   let navigate = useNavigate();
 
   const getApi = () => {
     axios.get("http://localhost:3001/api/home").then(function (response) {
-      setOperations(response.data);
-      return response;
+      const data = response.data
+      const dataParsed = JSON.parse(data.data)
+      const totalAmount = data.sum
+      setCash(totalAmount)
+      setOperations(dataParsed[0].Operations);
+      return dataParsed;
     });
   };
 
@@ -34,7 +39,7 @@ const Home = () => {
         <h1>HOME</h1>
         <Link to={"/form"}>Realizar Operación</Link>
         <button onClick={logOut}>Log-out</button>
-        <Balance data={operation.sum} />
+        <Balance data={cash} />
       </BalanceDiv>
 
       <TableStyle>
@@ -48,8 +53,8 @@ const Home = () => {
           </tr>
         </thead>
         <tbody>
-          {operation.data
-            ? operation.data.map((op) => {
+          {operation
+            ? operation.map((op) => {;
                 return <List data={op} key={op.id} />;
               })
             : "cargando..."}
