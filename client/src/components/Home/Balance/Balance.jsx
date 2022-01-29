@@ -3,8 +3,8 @@ import { CardStyle, ContentStyle, ContentStyleCash } from "./balanceStyles";
 
 
 const Balance = (prop) =>{
-  const cashBalance = prop.data
   console.log(prop);
+  const cashBalance = prop.data
 
   return(
       <CardStyle>

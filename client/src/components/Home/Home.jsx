@@ -16,7 +16,7 @@ const Home = () => {
       const dataParsed = JSON.parse(data.data)
       const totalAmount = data.sum
       setCash(totalAmount)
-      setOperations(dataParsed);
+      setOperations(dataParsed[0].Operations);
       return dataParsed;
     });
   };
