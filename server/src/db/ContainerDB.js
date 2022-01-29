@@ -6,15 +6,15 @@ class Bank {
   constructor(table) {
     if (table === "users") {
       this.table = User;
-    } else{
-      this.table = Operation
+    } else if (table === "operations") {
+      this.table = Operation;
     }
   }
 
   save = async (op) => {
     try {
       const saved = await this.table.create(op);
-      const data = JSON.stringify(saved, null, 4)
+      const data = JSON.stringify(saved, null, 4);
       return data;
     } catch (error) {
       console.log(error);
@@ -24,7 +24,7 @@ class Bank {
   getById = async (id) => {
     try {
       const getUsr = await this.table.findOne({ id: id });
-      const data = JSON.stringify(getUsr, null, 4)
+      const data = JSON.stringify(getUsr, null, 4);
       return data;
     } catch (error) {
       console.log(error);
@@ -34,8 +34,18 @@ class Bank {
   getAll = async () => {
     try {
       const results = await this.table.findAll();
-      const data = JSON.stringify(results, null, 4)
-      return data
+      const data = JSON.stringify(results, null, 4);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  getAllOp = async (id) => {
+    try {
+      const results = await User.findAll({where: {id: id}, include: [{model: Operation}]});
+      const data = JSON.stringify(results, null, 4);
+      return data;
     } catch (error) {
       console.log(error);
     }
@@ -55,8 +65,19 @@ class Bank {
 
   sumCash = async () => {
     try {
-      const totalCash = await this.table.sum("amount");
-      return totalCash
+      const results = await User.findOne({where: "", include: [{model: Operation}]});
+      const data = JSON.stringify(results, null, 4);
+      const dataOp = JSON.parse(data)
+      const dataSum = dataOp.Operations
+      const cash = dataSum.map((data, idx)=>{
+        let amount = data.amount
+        for (let i = 0; i < dataSum.length; i++) {
+          let sum = amount + amount
+          return sum
+        }
+      })
+      console.log(cash);
+      return cash[0];
     } catch (error) {
       console.log(error);
     }

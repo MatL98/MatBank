@@ -6,8 +6,5 @@ const sequelize = new Sequelize("bank", "root", "", {
 })
 
 
-
-
-
 module.exports = sequelize
 

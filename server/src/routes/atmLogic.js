@@ -2,14 +2,14 @@ const express = require("express");
 const { Router } = express;
 const router = new Router();
 const moment = require("moment");
-const Container = require("../dao/daoOpertaion")
+const Container = require("../dao/daoOpertaion");
 const bank = new Container();
 
+
 router.get("/home", async (req, res) => {
-  console.log(req);
-  const results = await bank.getAll()
-  const sum = await bank.sumCash();
-  res.json({ data: results, sum: sum });
+  const results = await bank.getAllOp(2)
+  const sum = await bank.sumCash(2)
+  res.json({ data: results, sum: sum  });
 });
 
 router.post("/form", async (req, res) => {

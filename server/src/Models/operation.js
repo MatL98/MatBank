@@ -19,10 +19,4 @@ const Operation = db.define(
   }
 );
 
-Operation.sync()
-  .then(() => {
-    console.log("Tabla creada");
-  })
-  .catch((err) => err);
-
 module.exports = Operation;

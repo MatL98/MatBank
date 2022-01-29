@@ -23,6 +23,7 @@ async function dbConnection(){
 app.use(bodyParser.json({ limit: "10mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 app.use(express.json());
+require("./src/Models/association")
 dbConnection()
 app.use(cookieParser("xhiperMegaSecreTx"));
 app.use(

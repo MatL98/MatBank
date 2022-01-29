@@ -18,10 +18,5 @@ const User = db.define(
   }
 );
 
-User.sync()
-  .then(() => {
-    console.log("Tabla creada");
-  })
-  .catch((err) => err);
 
 module.exports = User;
