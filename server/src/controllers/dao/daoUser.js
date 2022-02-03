@@ -1,4 +1,4 @@
-const ContenedorSequelize = require("../db/ContainerDB");
+const ContenedorSequelize = require("../ContainerDB");
 
 class UserDaoDB extends ContenedorSequelize {
   constructor() {

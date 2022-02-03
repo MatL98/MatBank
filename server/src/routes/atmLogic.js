@@ -2,14 +2,14 @@ const express = require("express");
 const { Router } = express;
 const router = new Router();
 const moment = require("moment");
-const Container = require("../dao/daoOpertaion");
+const Container = require("../controllers/dao/daoOperation");
 const bank = new Container();
 
 
 router.get("/home",async (req, res) => {
-  const results = await bank.getAllOp()
-  const sum = await bank.sumCash()
-  res.json({ data: results, sum: sum  });
+  const results = await bank.getAllOp(2)
+  const sum = await bank.sumCash(2)
+  res.json({ data: results,  sum: sum   });
 });
 
 router.post("/form",async (req, res) => {
@@ -18,19 +18,20 @@ router.post("/form",async (req, res) => {
     concept: concept,
     amount: amount,
     date: moment().format("D/MM/YY"),
-    type: type
+    type: type,
+    UserId: 2
   };
 
   const checkType = async (operation) => {
-    let cash = await bank.sumCash();
+    let cash = await bank.sumCash(2);
     if (operation.type === "entry") {
       await bank.save(operation);
-      await bank.sumCash();
+      await bank.sumCash(2);
     } else if (operation.type === "out") {
       const newOp = { ...operation, amount: -Math.abs(operation.amount) };
       if (cash != null || cash > operation.amount) {
         await bank.save(newOp);
-        await bank.sumCash();
+        await bank.sumCash(2);
       } else {
         res.json("No puedes retirar este monto");
       }

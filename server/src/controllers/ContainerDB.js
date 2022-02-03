@@ -41,9 +41,9 @@ class Bank {
     }
   };
 
-  getAllOp = async () => {
+  getAllOp = async (id) => {
     try {
-      const results = await User.findAll({where: "", include: [{model: Operation}]});
+      const results = await User.findAll({where: {id:id}, include: [{model: Operation}]});
       const data = JSON.stringify(results, null, 4);
       return data;
     } catch (error) {
@@ -63,9 +63,9 @@ class Bank {
     }
   };
 
-  sumCash = async () => {
+  sumCash = async (id) => {
     try {
-      const sum = await this.table.sum("amount");
+      const sum = await this.table.sum("amount", { where: { UserId: id } });
       return sum
     } catch (error) {
       console.log(error);
