@@ -12,7 +12,7 @@ router.post("/login", async (req, res, next) => {
       res.json("invalid");
     } else {
       req.logIn(user, (err) => {
-        res.json(req.user.mail);
+        res.json(req.user);
       });
     }
   })(req, res, next);
