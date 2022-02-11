@@ -1,7 +1,7 @@
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-const Container = require("../dao/daoUser");
-const bank = new Container();
+const Container = require("../controllers/dao/daoUser");
+const bank = new Container()
 const encrypt = require("./encrypt");
 const jwt = require("jsonwebtoken")
 require("dotenv").config()
@@ -17,6 +17,7 @@ passport.use(
     async (req, username, password, done) => {
       const { mail } = req.body;
       const result = await bank.getAll()
+      console.log(result);
       const dataParsed = JSON.parse(result)
       const getUser = dataParsed.filter((usr)=>{ return usr.mail === mail})
       if (getUser[0]) {

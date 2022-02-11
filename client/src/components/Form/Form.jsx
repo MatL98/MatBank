@@ -13,10 +13,13 @@ import {
 const Form = () => {
   const [showMessage, setShowMessage] = useState(false);
   const [failForm, setFailForm] = useState("");
+  const user = window.localStorage.getItem("loggedUserWithMail");
+  const userId = JSON.parse(user)
   const [datos, setDatos] = useState({
     concept: "",
     amount: "",
     type: "",
+    UserId: userId.id
   });
   function hide() {
     setShowMessage(false);
