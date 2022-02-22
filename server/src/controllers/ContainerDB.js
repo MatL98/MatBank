@@ -1,5 +1,6 @@
 const User = require("../Models/user");
 const Operation = require("../Models/operation");
+const Session = require("../Models/session");
 
 
 class Bank {
@@ -8,6 +9,8 @@ class Bank {
       this.table = User;
     } else if (table === "operations") {
       this.table = Operation;
+    } else if (table === "session") {
+      this.table = Session;
     }
   }
 
@@ -35,7 +38,7 @@ class Bank {
     try {
       const results = await this.table.findAll();
       const data = JSON.stringify(results, null, 4);
-      return data;
+      return data
     } catch (error) {
       console.log(error);
     }
