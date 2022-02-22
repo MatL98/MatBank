@@ -40,7 +40,7 @@ router.post("/signUp", (req, res, next) => {
 
 
 router.get("/logOut", async (req, res)=>{
-  await session.delete()
+  await session.delete(1)
 })
 
 module.exports = router;

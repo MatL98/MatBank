@@ -26,6 +26,9 @@ const Home = () => {
   }, []);
 
   const logOut = () => {
+    axios.get("http://localhost:3001/logOut").then(function(res){
+    return res
+    })
     let logged = window.localStorage.getItem("loggedUserWithMail");
     if (logged) {
     window.localStorage.removeItem("loggedUserWithMail")
