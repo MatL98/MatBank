@@ -11,10 +11,10 @@ const session = new ContainerSession()
 router.get("/home", async (req, res) => {
   const dataUser = await session.getAll()
   const dataUserParse = JSON.parse(dataUser)
-  const userData = JSON.parse(dataUserParse[0].user)
-  console.log(userData);
-  const results = await bank.getAll(userData.id)
-  const sum = await bank.sumCash(userData.id)
+  const userData = dataUserParse[0].user
+  const userDataParse = JSON.parse(userData)
+  const results = await bank.getAll(userDataParse.id)
+  const sum = await bank.sumCash(userDataParse.id)
   res.json({ data: results,  sum: sum  });
 });
 

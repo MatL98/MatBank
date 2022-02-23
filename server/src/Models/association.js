@@ -5,8 +5,8 @@ const sequelize = require("../db/db")
 User.hasMany(Operation);
 Operation.belongsTo(User, {constraints: false});
 
-sequelize.sync({ alter: true })
+sequelize.sync({ force: false })
   .then(() => {
-    console.log("Tabla creada");
+    console.log("connected data base");
   })
   .catch((err) => err);
