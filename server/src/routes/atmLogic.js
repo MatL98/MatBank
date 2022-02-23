@@ -12,7 +12,8 @@ router.get("/home", async (req, res) => {
   const dataUser = await session.getAll()
   const dataUserParse = JSON.parse(dataUser)
   const userData = JSON.parse(dataUserParse[0].user)
-  const results = await bank.getAllOp(userData.id)
+  console.log(userData);
+  const results = await bank.getAll(userData.id)
   const sum = await bank.sumCash(userData.id)
   res.json({ data: results,  sum: sum  });
 });

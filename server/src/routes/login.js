@@ -15,6 +15,7 @@ router.post("/login", async (req, res, next) => {
     } else {
       req.logIn(user, (err) => {
         const user = {
+          id: 1,
           user: req.user
         }
         res.json(req.user);

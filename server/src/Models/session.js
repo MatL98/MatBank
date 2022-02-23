@@ -6,8 +6,7 @@ const Sessions = db.define(
   {
     id: {
       type: DataTypes.INTEGER,
-      primaryKey: true,
-			autoIncrement: true
+      primaryKey: true
     },
     user: DataTypes.JSON,
   },
