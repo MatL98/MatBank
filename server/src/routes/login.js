@@ -27,13 +27,12 @@ router.post("/login", async (req, res, next) => {
 
 router.post("/signUp", (req, res, next) => {
   passport.authenticate("local-signUp", (err, user) => {
-
     if (err) throw err;
     if (!user) {
       res.json("no");
     } else {
       req.logIn(user, (err) => {
-        res.json("ok");
+        res.json(req.user.mail);
       });
     }
   })(req, res, next);
