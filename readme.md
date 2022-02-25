@@ -5,20 +5,20 @@ The app simulate a kind of "expense schedule" or a "Home Banking", when the user
 
 You can register a new user or use: 
 
--mail: test@mail.com
--username: test
--password: test123
+- mail: test@mail.com
+- username: test
+- password: test123
 
 ## Tools Used
 
--React.Js
--React Router Dom
--Style Components
--Axios
--Node.Js
--Express.Js
--Knex
--MySql
+- React.Js
+- React Router Dom
+- Style Components
+- Axios
+- Node.Js
+- Express.Js
+- Sequelize
+- MySql
 
 
 ## How to install the project
