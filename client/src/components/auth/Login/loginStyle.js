@@ -84,7 +84,7 @@ export const PopUp = styled.div`
   display: flex;
   align-items: center;
   margin-top: 2rem;
-  height: 2.2rem;
+  height: 2.8rem;
   width: 100%;
   border-radius: 35px;
   background: rgba(255, 255, 255, 0.2);
@@ -101,6 +101,7 @@ export const PopUp = styled.div`
   }
   @media screen and (min-width: 768px) {
     {
+      height: 2.2rem;
       width: 500px;
     }
   }
@@ -109,7 +110,7 @@ export const PopUp2 = styled.div`
   display: flex;
   align-items: center;
   margin-top: 2rem;
-  height: 2.2rem;
+  height: 2.8rem;
   border-radius: 35px;
   background: rgba(255, 255, 255, 0.2);
   padding: 0.5rem 1.2rem;
@@ -125,6 +126,7 @@ export const PopUp2 = styled.div`
   }
   @media screen and (min-width: 768px) {
     {
+      height: 2.2rem;
       width: 500px;
     }
   }

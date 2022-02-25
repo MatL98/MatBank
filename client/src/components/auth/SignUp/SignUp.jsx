@@ -22,7 +22,6 @@ const SignUp = () => {
           "http://localhost:3001/signUp",
           datos
         );
-        console.log(data);
         if (data === datos.mail) {
           navigate("/login");
         } else if(data === "no"){
