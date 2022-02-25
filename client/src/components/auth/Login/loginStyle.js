@@ -99,6 +99,11 @@ export const PopUp = styled.div`
     font-weight: 600;
     letter-spacing: 1px;
   }
+  @media screen and (min-width: 768px) {
+    {
+      width: 500px;
+    }
+  }
 `;
 export const PopUp2 = styled.div`
   display: flex;
@@ -117,5 +122,10 @@ export const PopUp2 = styled.div`
     font-size: 1.3rem;
     font-weight: 600;
     letter-spacing: 1px;
+  }
+  @media screen and (min-width: 768px) {
+    {
+      width: 500px;
+    }
   }
 `;

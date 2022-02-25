@@ -38,7 +38,7 @@ const Login = () => {
         setShowMessage(true);
         setTimeout(hide, 2000);
       } else {
-        let msn = "es necesario eligir los tres campos";
+        let msn = "Es necesario eligir los tres campos";
         setFailForm(msn);
         setTimeout(hide, 2000);
       }
