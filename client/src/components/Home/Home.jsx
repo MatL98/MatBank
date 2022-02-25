@@ -8,6 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 const Home = () => {
   const [operation, setOperations] = useState([]);
   const [cash, setCash] = useState(0);
+  const [userName, setUserName] = useState()
   let navigate = useNavigate();
 
   const getApi = () => {
@@ -15,6 +16,7 @@ const Home = () => {
       const data = response.data
       const dataParsed = JSON.parse(data.data)
       const totalAmount = data.sum
+      setUserName(dataParsed[0].username)
       setCash(totalAmount)
       setOperations(dataParsed[0].Operations);
       return dataParsed;
@@ -26,6 +28,9 @@ const Home = () => {
   }, []);
 
   const logOut = () => {
+    axios.get("http://localhost:3001/logOut").then(function(res){
+    return res
+    })
     let logged = window.localStorage.getItem("loggedUserWithMail");
     if (logged) {
     window.localStorage.removeItem("loggedUserWithMail")
@@ -39,7 +44,7 @@ const Home = () => {
         <h1>HOME</h1>
         <Link to={"/form"}>Realizar Operación</Link>
         <button onClick={logOut}>Log-out</button>
-        <Balance data={cash} />
+        <Balance data={cash} user={userName}/>
       </BalanceDiv>
 
       <TableStyle>

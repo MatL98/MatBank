@@ -4,12 +4,18 @@ const router = new Router();
 const moment = require("moment");
 const Container = require("../controllers/dao/daoOperation");
 const bank = new Container();
+const ContainerSession = require("../controllers/dao/daoSession")
+const session = new ContainerSession()
 
 
-router.get("/home",async (req, res) => {
-  const results = await bank.getAllOp(1)
-  const sum = await bank.sumCash(1)
-  res.json({ data: results,  sum: sum   });
+router.get("/home", async (req, res) => {
+  const dataUser = await session.getAll()
+  const dataUserParse = JSON.parse(dataUser)
+  const userData = dataUserParse[0].user
+  const userDataParse = JSON.parse(userData)
+  const results = await bank.getAll(userDataParse.id)
+  const sum = await bank.sumCash(userDataParse.id)
+  res.json({ data: results,  sum: sum  });
 });
 
 router.post("/form",async (req, res) => {

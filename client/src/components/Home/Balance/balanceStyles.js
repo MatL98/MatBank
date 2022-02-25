@@ -29,15 +29,23 @@ export const CardStyle = styled.div`
     }     
 `;
 
+export const ContentStyleH1 = styled.p`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-top: 2.5rem;
+  text-transform: capitalize;
+  color: black;
+  font-size: 2rem;
+`;
 export const ContentStyle = styled.p`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin-top: 5rem;
+  margin-top: 2rem;
   color: black;
   font-size: 2rem;
 `;
-
 export const ContentStyleCash = styled.p`
   display: flex;
   flex-direction: row;

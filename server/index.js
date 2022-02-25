@@ -9,6 +9,7 @@ const session = require("express-session");
 const cors = require("cors");
 const passport = require("passport");
 
+
 const app = express();
 require("./src/lib/authenticate");
 
@@ -27,12 +28,12 @@ app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 app.use(express.json());
 require("./src/Models/association")
 dbConnection()
-app.use(cookieParser("xhiperMegaSecreTx"));
+app.use(cookieParser(process.env.SESSION_SECRET));
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
-    resave: true,
-    saveUninitialized: true,
+    resave: false,
+    saveUninitialized: false,
     cookie: {maxAge: 300000}
   })
   );

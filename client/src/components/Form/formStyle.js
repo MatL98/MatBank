@@ -104,7 +104,7 @@ export const PopUp = styled.div`
 	align-items: center;
 	margin-top: 2rem;	
 	height: 2.5rem;	
-	width: 50%;
+	width: 100%;
 	border-radius: 35px;
 	background: rgba(255, 255, 255, 0.2);
 	padding: 0.5rem 1.2rem;
@@ -120,6 +120,11 @@ export const PopUp = styled.div`
 		font-weight: 600;
 		letter-spacing: 1px;
 	}
+  @media screen and (min-width: 768px) {
+    {
+      width: 500px;
+    }
+  }
 `;
 export const PopUp2 = styled.div`
 	display: flex;
@@ -141,4 +146,9 @@ export const PopUp2 = styled.div`
 		font-weight: 600;
 		letter-spacing: 1px;
 	}
+  @media screen and (min-width: 768px) {
+    {
+      width: 500px;
+    }
+  }
 `;

@@ -1,5 +1,6 @@
 const User = require("../Models/user");
 const Operation = require("../Models/operation");
+const Session = require("../Models/session");
 
 
 class Bank {
@@ -8,6 +9,8 @@ class Bank {
       this.table = User;
     } else if (table === "operations") {
       this.table = Operation;
+    } else if (table === "session") {
+      this.table = Session;
     }
   }
 
@@ -31,25 +34,22 @@ class Bank {
     }
   };
 
-  getAll = async () => {
+  getAll = async (id) => {
     try {
-      const results = await this.table.findAll();
-      const data = JSON.stringify(results, null, 4);
-      return data;
+      if (this.table === Operation) {
+        const results = await User.findAll({where: {id:id}, include: [{model: Operation, limit: 10, order:[['id', 'DESC']]}]});
+        const data = JSON.stringify(results, null, 4);
+        return data
+      } else {
+        const results = await this.table.findAll();
+        const data = JSON.stringify(results, null, 4);
+        return data
+      }
     } catch (error) {
       console.log(error);
     }
   };
 
-  getAllOp = async (id) => {
-    try {
-      const results = await User.findAll({where: {id:id}, include: [{model: Operation}]});
-      const data = JSON.stringify(results, null, 4);
-      return data;
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   update = async (id, updateOp) => {
     try {

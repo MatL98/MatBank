@@ -22,11 +22,15 @@ const SignUp = () => {
           "http://localhost:3001/signUp",
           datos
         );
-        if (data === "ok") {
+        if (data === datos.mail) {
           navigate("/login");
+        } else if(data === "no"){
+          let msn = "Ya existe una cuenta con este mail";
+          setFailForm(msn);
+          setTimeout(hide, 2000);
         }
       } else {
-        let msn = "es necesario eligir los tres campos";
+        let msn = "Es necesario eligir los tres campos";
         setFailForm(msn);
         setTimeout(hide, 2000);
       }
