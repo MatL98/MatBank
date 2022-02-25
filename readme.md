@@ -18,6 +18,7 @@ You can register a new user or use:
 - Node.Js
 - Express.Js
 - Sequelize
+- JWT
 - MySql
 
 
