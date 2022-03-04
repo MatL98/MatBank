@@ -17,7 +17,6 @@ passport.use(
     async (req, username, password, done) => {
       const { mail } = req.body;
       const result = await users.getAll();
-      console.log(result);
       const dataParsed = JSON.parse(result);
       const getUser = dataParsed.filter((usr) => {
         return usr.mail === mail;
