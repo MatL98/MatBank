@@ -57,7 +57,7 @@ router.patch("/:id", (req, res) => {
 
   console.log(updateOp);
 
-  //bank.update(id, updateOp);
+  bank.update(id, updateOp);
   res.status(200).send("se actualizó con exito");
 });
 

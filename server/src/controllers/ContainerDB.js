@@ -2,7 +2,6 @@ const User = require("../Models/user");
 const Operation = require("../Models/operation");
 const Session = require("../Models/session");
 
-
 class Bank {
   constructor(table) {
     if (table === "users") {
@@ -37,27 +36,31 @@ class Bank {
   getAll = async (id) => {
     try {
       if (this.table === Operation) {
-        const results = await User.findAll({where: {id:id}, include: [{model: Operation, limit: 10, order:[['id', 'DESC']]}]});
+        const results = await User.findAll({
+          where: { id: id },
+          include: [{ model: Operation, limit: 10, order: [["id", "DESC"]] }],
+        });
         const data = JSON.stringify(results, null, 4);
-        return data
+        return data;
       } else {
         const results = await this.table.findAll();
         const data = JSON.stringify(results, null, 4);
-        return data
+        return data;
       }
     } catch (error) {
       console.log(error);
     }
   };
 
-
   update = async (id, updateOp) => {
     try {
-      const updt = await this.table.findOne({ where: { id: id } }).update({
+      const updateData = {
         concept: updateOp.concept,
         amount: updateOp.amount,
-      });
-      return updt;
+      }
+      const dataUpdate = await this.table.update(updateData, {where: {id: id}})
+      
+      return dataUpdate;
     } catch (error) {
       console.log(error);
     }
@@ -66,7 +69,7 @@ class Bank {
   sumCash = async (id) => {
     try {
       const sum = await this.table.sum("amount", { where: { UserId: id } });
-      return sum
+      return sum;
     } catch (error) {
       console.log(error);
     }
