@@ -29,4 +29,4 @@ const Operation = db.define(
   },
 );
 
-module.exports ={ Operation};
+module.exports ={Operation};

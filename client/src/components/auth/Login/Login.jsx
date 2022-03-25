@@ -26,19 +26,19 @@ const Login = () => {
     e.preventDefault();
     try {
       if (datos.username && datos.mail && datos.password) {
-        const { data } = await axios.post("http://localhost:3001/api/login", datos);
-        console.log(data);
-        if (data.mail === datos.mail && data.password === datos.password) {
+        const { data } = await axios.post("http://localhost:3001/api/auth/login", datos);
+        if (data.mail === datos.mail) {
           window.localStorage.setItem(
-            "loggedUserWithMail",
-            JSON.stringify(data)
+          "loggedUserWithMail",
+          JSON.stringify(data.mail)
           );
           window.localStorage.setItem("token",
           JSON.stringify(data.token))
           navigate("/home");
+        } else {
+          setShowMessage(true);
+          setTimeout(hide, 2000);
         }
-        setShowMessage(true);
-        setTimeout(hide, 2000);
       } else {
         let msn = "Es necesario eligir los tres campos";
         setFailForm(msn);

@@ -5,8 +5,8 @@ const user = ContainerDao.user;
 const getAllUser = async () => {
   try {
     const response = await user.getAll();
-		console.log(response);
-    return response;
+		const data = JSON.parse(response)
+    return data;
   } catch (error) {
     throw Error(error);
   }
@@ -14,15 +14,17 @@ const getAllUser = async () => {
 const getUserById = async (id) => {
   try {
     const response = await user.getById(id);
-    return response;
+		const data = JSON.parse(response)
+    return data;
   } catch (error) {
     throw Error(error);
   }
 };
-const saveUser = async (user) => {
+const saveUser = async (newUser) => {
   try {
-    const response = await user.save(user);
-    return response;
+    const response = await user.save(newUser);
+		const data = JSON.parse(response)
+    return data;
   } catch (error) {
     throw Error(error);
   }

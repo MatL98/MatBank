@@ -7,18 +7,17 @@ const authLogin = (req, res, next) => {
       if (!user) {
         res.json("invalid");
       } else {
-        req.logIn(user, (err) => {
-          const user = {
-            id: user.id,
-            user: req.user,
+        req.logIn(user, async (err) => {
+          const userData = {
+            id: req.user.id,
+            user: {id: req.user.id, user: req.user.mail},
           };
-          console.log(user);
           res.json({
-            dataUser: user.mail,
+            mail: user.mail,
             token: user.token,
-            idUser: user.id,
+            idUser: user.id
           });
-          saveSession(user);
+          await saveSession(userData);
         });
       }
     })(req, res, next);

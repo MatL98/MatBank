@@ -4,7 +4,8 @@ const session = ContainerDao.session;
 const getAllSessions = async () => {
   try {
     const response = await session.getAll()
-    return response;
+		const data = JSON.parse(response)
+    return data;
   } catch (error) {
     throw Error(error);
   }
@@ -17,18 +18,19 @@ const getSessionById = async () => {
 	let id = userData.id
   console.log(userData.id)
   try {
-    const response = await session.getById(id);
-		console.log(response);
-    return response;
+    const response = await session.getById(id)
+		const data = JSON.parse(response)
+    return data;
   } catch (error) {
     throw Error(error);
   }
 };
 
-const saveSession = async () => {
+const saveSession = async (newSession) => {
   try {
-    const response = await session.save();
-    return response;
+    const response = await session.save(newSession);
+		const data = JSON.parse(response)
+    return data;
   } catch (error) {
     throw Error(error);
   }
@@ -37,7 +39,8 @@ const saveSession = async () => {
 const deleteSession = async () => {
   try {
     const response = await session.delete();
-    return response;
+		const data = JSON.parse(response)
+    return data;
   } catch (error) {
     throw Error(error);
   }
