@@ -1,9 +1,9 @@
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-module.exports = (req, res, next) => {
-
-  if (!req.headers.authorization) {
+const verifyToken = (req, res, next) => {
+  let bearerToken = req.get('authorization')
+  if (!bearerToken) {
     res.status(504).json({ msg: "denied" });
   } else {
     let token = req.headers.authorization.split(" ")[1];
@@ -17,3 +17,5 @@ module.exports = (req, res, next) => {
     });
   }
 };
+
+module.exports = {verifyToken}

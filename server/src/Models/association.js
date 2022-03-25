@@ -1,5 +1,5 @@
-const User = require("../Models/user");
-const Operation = require("../Models/operation");
+const {User} = require("../Models/user");
+const {Operation} = require("../Models/operation");
 const sequelize = require("../db/db")
 
 User.hasMany(Operation);

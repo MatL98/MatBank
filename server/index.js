@@ -40,7 +40,7 @@ app.use(
   app.use(passport.initialize());
   app.use(passport.session());
   app.use(cors());
-app.use("/", routerLogin);
+app.use("/api", routerLogin);
 app.use("/api", routerAtm);
 
 app.listen(port, () => {

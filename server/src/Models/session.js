@@ -15,4 +15,4 @@ const Sessions = db.define(
   }
 );
 
-module.exports = Sessions;
+module.exports = {Sessions};

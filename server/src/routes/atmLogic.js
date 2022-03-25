@@ -2,21 +2,11 @@ const express = require("express");
 const { Router } = express;
 const router = new Router();
 const moment = require("moment");
-const Container = require("../controllers/dao/daoOperation");
-const bank = new Container();
-const ContainerSession = require("../controllers/dao/daoSession")
-const session = new ContainerSession()
+const { getOperation } = require("../controllers/atmController");
+const { verifyToken } = require("../middlewares/auth");
 
 
-router.get("/home", async (req, res) => {
-  const dataUser = await session.getAll()
-  const dataUserParse = JSON.parse(dataUser)
-  const userData = dataUserParse[0].user
-  const userDataParse = JSON.parse(userData)
-  const results = await bank.getAll(userDataParse.id)
-  const sum = await bank.sumCash(userDataParse.id)
-  res.json({ data: results,  sum: sum  });
-});
+router.get("/home",verifyToken, getOperation);
 
 router.post("/form",async (req, res) => {
   const { concept, amount, type, UserId } = req.body;
