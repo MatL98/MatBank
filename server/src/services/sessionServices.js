@@ -12,15 +12,13 @@ const getAllSessions = async () => {
 };
 
 const getSessionById = async () => {
-	const dataUser = await session.getAllSessions()
-  const dataUserParse = JSON.parse(dataUser)
-  const userData = dataUserParse[0].user
-	let id = userData.id
-  console.log(userData.id)
-  try {
-    const response = await session.getById(id)
-		const data = JSON.parse(response)
-    return data;
+	try {
+		const data = await getAllSessions()
+		const dataUser = data[0]
+		const dataUserParse = JSON.parse(dataUser.user)
+		const userData = dataUserParse
+		let id = userData.id
+    return id;
   } catch (error) {
     throw Error(error);
   }
@@ -40,6 +38,7 @@ const deleteSession = async () => {
   try {
     const response = await session.delete();
 		const data = JSON.parse(response)
+    console.log(data);
     return data;
   } catch (error) {
     throw Error(error);

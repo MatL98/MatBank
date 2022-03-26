@@ -1,3 +1,4 @@
+const { User } = require("../../Models/user");
 class Bank {
   constructor(table) {
     console.log(table);
@@ -8,6 +9,7 @@ class Bank {
     try {
       const saved = await this.table.create(op);
       const data = JSON.stringify(saved, null, 4);
+      console.log(data);
       return data;
     } catch (error) {
       console.log(error);
@@ -34,6 +36,19 @@ class Bank {
     }
   };
 
+  getOperationsByUser = async (id) => {
+    try {
+      const results = await User.findAll({
+        where: { id: id },
+        include: [{ model: this.table, limit: 10, order: [["id", "DESC"]] }],
+      });
+      const data = JSON.stringify(results, null, 4);
+      return data;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   update = async (id, updateOp) => {
     try {
       const updateData = {
@@ -49,10 +64,15 @@ class Bank {
 
   delete = async (id) => {
     try {
-      const data = await (
-        await this.table.findOne({ where: { id: id } })
-      ).destroy();
-      return data;
+      if (id) {
+        const data = await (
+          await this.table.findOne({ where: { id: id } })
+        ).destroy();
+        return data
+      }else{
+        const data = await this.table.delete({})
+        return data
+      }
     } catch (error) {
       console.log(error);
     }

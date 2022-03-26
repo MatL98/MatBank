@@ -11,7 +11,7 @@ const Balance = (prop) =>{
       <CardStyle>
         <ContentStyleH1>{userName}</ContentStyleH1>
         <ContentStyle>Saldo de tu cuenta</ContentStyle>
-        <ContentStyleCash>${cashBalance}</ContentStyleCash>
+        <ContentStyleCash>${cashBalance || 0}</ContentStyleCash>
       </CardStyle>
   )
 

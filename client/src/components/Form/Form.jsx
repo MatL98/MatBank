@@ -13,13 +13,13 @@ import {
 const Form = () => {
   const [showMessage, setShowMessage] = useState(false);
   const [failForm, setFailForm] = useState("");
-  const user = window.localStorage.getItem("loggedUserWithMail");
+  const user = window.localStorage.getItem("idUser");
   const userId = JSON.parse(user)
   const [datos, setDatos] = useState({
     concept: "",
     amount: "",
     type: "",
-    UserId: userId.id
+    UserId: userId
   });
   function hide() {
     setShowMessage(false);
@@ -90,7 +90,7 @@ const Form = () => {
       <PopUp style={{ visibility: showMessage ? "visible" : "hidden" }}>
         <p>
           {datos.type === "entry"
-            ? `Ingresaste ${datos.amount}`
+            ? `Ingresaste $${datos.amount}`
             : `Retiraste ${datos.amount}`}
         </p>
       </PopUp>

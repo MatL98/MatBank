@@ -1,6 +1,5 @@
 const ContenedorSequelize = require("../../controllers/container/ContainerDB");
 const {Operation} = require("../operation")
-const {User} = require("./daoUser")
 
 class OperationsDaoDB extends ContenedorSequelize {
   constructor() {
@@ -15,14 +14,6 @@ class OperationsDaoDB extends ContenedorSequelize {
       console.log(error);
     }
   };
-  getOperations = async (id) =>{
-    const results = await User.findAll({
-      where: { id: id },
-      include: [{ model: Operation, limit: 10, order: [["id", "DESC"]] }],
-    });
-    const data = JSON.stringify(results, null, 4);
-    return data;
-  }
 }
 
 module.exports = OperationsDaoDB;

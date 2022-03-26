@@ -1,5 +1,4 @@
 const ContainerDao = require("../models/dao/factoryDaos");
-
 const user = ContainerDao.user;
 
 const getAllUser = async () => {
@@ -11,6 +10,7 @@ const getAllUser = async () => {
     throw Error(error);
   }
 };
+
 const getUserById = async (id) => {
   try {
     const response = await user.getById(id);
@@ -20,6 +20,7 @@ const getUserById = async (id) => {
     throw Error(error);
   }
 };
+
 const saveUser = async (newUser) => {
   try {
     const response = await user.save(newUser);
@@ -33,4 +34,5 @@ module.exports = {
   getAllUser,
   getUserById,
   saveUser,
+  //getOperationByUser
 };

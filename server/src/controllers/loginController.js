@@ -37,8 +37,8 @@ const authSignUp = (req, res, next) =>{
 }
 
 const authLogOut = async (req, res) =>{
-		let id = req.body.id
-		await deleteSession(id)
+		let dlt = await deleteSession()
+    res.status(200).json(dlt)
 }
 
 module.exports = {authLogin, authSignUp, authLogOut}
