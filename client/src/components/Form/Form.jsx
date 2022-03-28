@@ -9,6 +9,7 @@ import {
   PopUp,
   PopUp2,
 } from "./formStyle";
+import NavBar from "../NavBar/NavBar";
 
 const Form = () => {
   const [showMessage, setShowMessage] = useState(false);
@@ -46,9 +47,9 @@ const Form = () => {
 
   return (
     <ContainerForm>
+      <NavBar/>
       <TitleDiv>
         <h1>Ingresar Operaciones</h1>
-        <Link to={"/home"}>Regresar al home</Link>
       </TitleDiv>
       <FormStyle>
         <h2>Formulario</h2>

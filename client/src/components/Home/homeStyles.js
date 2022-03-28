@@ -25,6 +25,10 @@ export const BalanceDiv = styled.div`
     color: white;
     text-transform: capitalize;
   }
+
+  h1{
+    text-align: center;
+  }
   
   button{
     background: none;

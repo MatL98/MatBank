@@ -8,7 +8,6 @@ class Bank {
     try {
       const saved = await this.table.create(op);
       const data = JSON.stringify(saved, null, 4);
-      console.log(data);
       return data;
     } catch (error) {
       console.log(error);

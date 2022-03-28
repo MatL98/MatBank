@@ -6,6 +6,7 @@ import List from "./List/ListOperations";
 import { Link, useNavigate } from "react-router-dom";
 
 import {initAxiosHeader} from "../../helper/header"
+import NavBar from "../NavBar/NavBar";
 initAxiosHeader()
 
 const Home = () => {
@@ -29,25 +30,12 @@ const Home = () => {
     getApi();
   }, []);
 
-  const logOut = () => {
-    axios.get("http://localhost:3001/api/auth/logOut").then(function(res){
-    return res
-    })
-    let logged = window.localStorage.getItem("loggedUserWithMail");
-    if (logged) {
-    window.localStorage.removeItem("loggedUserWithMail")
-    window.localStorage.removeItem("token")
-    window.localStorage.removeItem("idUser")
-    navigate("/login")
-  }
-}
 
   return (
     <HomeStyle>
+      <NavBar/>
       <BalanceDiv>
         <h1>HOME</h1>
-        <Link to={"/form"}>Realizar Operación</Link>
-        <button onClick={logOut}>Log-out</button>
         <Balance data={cash} user={userName}/>
       </BalanceDiv>
 
