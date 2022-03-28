@@ -12,6 +12,7 @@ export const CardStyle = styled.div`
   border-top: 1px solid rgba(255,255, 255, 0.1);
   margin-top: 0.5rem;
 
+
   :before{
     content: '';
     position: absolute;

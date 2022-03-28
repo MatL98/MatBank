@@ -9,17 +9,18 @@ import {
   PopUp,
   PopUp2,
 } from "./formStyle";
+import NavBar from "../NavBar/NavBar";
 
 const Form = () => {
   const [showMessage, setShowMessage] = useState(false);
   const [failForm, setFailForm] = useState("");
-  const user = window.localStorage.getItem("loggedUserWithMail");
+  const user = window.localStorage.getItem("idUser");
   const userId = JSON.parse(user)
   const [datos, setDatos] = useState({
     concept: "",
     amount: "",
     type: "",
-    UserId: userId.id
+    UserId: userId
   });
   function hide() {
     setShowMessage(false);
@@ -46,9 +47,9 @@ const Form = () => {
 
   return (
     <ContainerForm>
+      <NavBar/>
       <TitleDiv>
         <h1>Ingresar Operaciones</h1>
-        <Link to={"/home"}>Regresar al home</Link>
       </TitleDiv>
       <FormStyle>
         <h2>Formulario</h2>
@@ -90,7 +91,7 @@ const Form = () => {
       <PopUp style={{ visibility: showMessage ? "visible" : "hidden" }}>
         <p>
           {datos.type === "entry"
-            ? `Ingresaste ${datos.amount}`
+            ? `Ingresaste $${datos.amount}`
             : `Retiraste ${datos.amount}`}
         </p>
       </PopUp>

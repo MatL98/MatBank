@@ -1,7 +1,7 @@
 const { DataTypes } = require("sequelize");
 const db = require("../db/db");
 
-const Sessions = db.define(
+const Session = db.define(
   "Session",
   {
     id: {
@@ -15,4 +15,4 @@ const Sessions = db.define(
   }
 );
 
-module.exports = Sessions;
+module.exports = {Session};

@@ -5,6 +5,10 @@ import axios from "axios";
 import List from "./List/ListOperations";
 import { Link, useNavigate } from "react-router-dom";
 
+import {initAxiosHeader} from "../../helper/header"
+import NavBar from "../NavBar/NavBar";
+initAxiosHeader()
+
 const Home = () => {
   const [operation, setOperations] = useState([]);
   const [cash, setCash] = useState(0);
@@ -14,12 +18,11 @@ const Home = () => {
   const getApi = () => {
     axios.get("http://localhost:3001/api/home").then(function (response) {
       const data = response.data
-      const dataParsed = JSON.parse(data.data)
       const totalAmount = data.sum
-      setUserName(dataParsed[0].username)
+      setUserName(data.data[0].username)
       setCash(totalAmount)
-      setOperations(dataParsed[0].Operations);
-      return dataParsed;
+      setOperations(data.data[0].Operations);
+      return data;
     });
   };
 
@@ -27,23 +30,12 @@ const Home = () => {
     getApi();
   }, []);
 
-  const logOut = () => {
-    axios.get("http://localhost:3001/logOut").then(function(res){
-    return res
-    })
-    let logged = window.localStorage.getItem("loggedUserWithMail");
-    if (logged) {
-    window.localStorage.removeItem("loggedUserWithMail")
-    navigate("/login")
-  }
-}
 
   return (
     <HomeStyle>
+      <NavBar/>
       <BalanceDiv>
         <h1>HOME</h1>
-        <Link to={"/form"}>Realizar Operación</Link>
-        <button onClick={logOut}>Log-out</button>
         <Balance data={cash} user={userName}/>
       </BalanceDiv>
 

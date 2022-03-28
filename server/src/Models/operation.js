@@ -13,20 +13,11 @@ const Operation = db.define(
     amount: DataTypes.INTEGER,
     date: DataTypes.STRING,
     type: DataTypes.STRING,
+    UserId: DataTypes.INTEGER,
   },
   {
     timestamps: false,
-  },
-  {
-    UserId: DataTypes.INTEGER,
-    allowNull: true,
-    references:{
-      model: "users",
-      key: "id"
-    },
-    onDelete: "CASCADE",
-    onUpdate: "CASCADE"
-  },
+  }
 );
 
-module.exports = Operation;
+module.exports ={Operation};

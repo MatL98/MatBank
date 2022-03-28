@@ -1,0 +1,32 @@
+.navBarHome {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  padding: 0.3rem 0;
+  width: 20rem;
+}
+.navBar > ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.navBar > ul > li {
+  margin: 0 2rem;
+  text-decoration: none;
+  list-style: none;
+}
+.navBar > ul > li > a {
+  text-decoration: none;
+  font-weight: 700;
+  color: white;
+  font-size: 1.2rem;
+}
+.btnLogOut{
+  background: none;
+  border-radius: 5px;
+  font-weight: 700;
+  color: white;
+  border: none;
+  font-size: 1.2rem;
+}

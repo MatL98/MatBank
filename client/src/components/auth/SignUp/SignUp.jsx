@@ -19,7 +19,7 @@ const SignUp = () => {
     try {
       if (datos.username && datos.mail && datos.password) {
         const { data } = await axios.post(
-          "http://localhost:3001/signUp",
+          "http://localhost:3001/api/auth/signUp",
           datos
         );
         if (data === datos.mail) {
