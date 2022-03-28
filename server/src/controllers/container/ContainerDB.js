@@ -1,7 +1,6 @@
 const { User } = require("../../Models/user");
 class Bank {
   constructor(table) {
-    console.log(table);
     this.table = table;
   }
 
@@ -55,7 +54,8 @@ class Bank {
         concept: updateOp.concept,
         amount: updateOp.amount,
       };
-      const data = await this.table.update(updateData, { where: { id: id } });
+      const results = await this.table.update(updateData, { where: { id: id } });
+      const data = JSON.stringify(results, null, 4);
       return data;
     } catch (error) {
       console.log(error);
@@ -63,14 +63,17 @@ class Bank {
   };
 
   delete = async (id) => {
+    console.log(id);
     try {
       if (id) {
-        const data = await (
+        const results = await (
           await this.table.findOne({ where: { id: id } })
         ).destroy();
+        const data = JSON.stringify(results, null, 4);
         return data
       }else{
-        const data = await this.table.delete({})
+        const results = await this.table.destroy()
+        const data = JSON.stringify(results, null, 4);
         return data
       }
     } catch (error) {

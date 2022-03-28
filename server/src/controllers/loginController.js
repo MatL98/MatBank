@@ -12,12 +12,12 @@ const authLogin = (req, res, next) => {
             id: req.user.id,
             user: {id: req.user.id, user: req.user.mail},
           };
+          await saveSession(userData);
           res.json({
             mail: user.mail,
             token: user.token,
             idUser: user.id
           });
-          await saveSession(userData);
         });
       }
     })(req, res, next);
@@ -37,7 +37,7 @@ const authSignUp = (req, res, next) =>{
 }
 
 const authLogOut = async (req, res) =>{
-		let dlt = await deleteSession()
+		let dlt = await deleteSession(1)
     res.status(200).json(dlt)
 }
 

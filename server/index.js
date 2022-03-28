@@ -27,7 +27,6 @@ app.use(bodyParser.json({ limit: "10mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 app.use(express.json());
 require("./src/Models/association")
-dbConnection()
 app.use(cookieParser(process.env.SESSION_SECRET));
 app.use(
   session({
@@ -44,5 +43,6 @@ app.use("/api/auth", routerLogin);
 app.use("/api", routerAtm);
 
 app.listen(port, () => {
+  dbConnection()
   console.log(`Server is running on ${port}`);
 });

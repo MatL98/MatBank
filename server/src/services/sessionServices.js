@@ -34,11 +34,10 @@ const saveSession = async (newSession) => {
   }
 };
 
-const deleteSession = async () => {
+const deleteSession = async (id) => {
   try {
-    const response = await session.delete();
+    const response = await session.delete(id);
 		const data = JSON.parse(response)
-    console.log(data);
     return data;
   } catch (error) {
     throw Error(error);

@@ -20,9 +20,9 @@ const saveOperation = async (infoOperation) => {
     throw Error(error);
   }
 };
-const deleteOperation = async () => {
+const deleteOperation = async (id) => {
   try {
-    const response = await operation.delete();
+    const response = await operation.delete(id);
     const data = JSON.parse(response);
     return data;
   } catch (error) {
